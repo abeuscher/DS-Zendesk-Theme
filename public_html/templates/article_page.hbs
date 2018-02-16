@@ -1,0 +1,49 @@
+
+<main class="main-sidebar" role="main">
+  <div class="sidebar-panel" id="sidebar">
+    <ul class="sidebar">
+      <li class="sidebar-item sidebar-home"><a class="sidebar-item-title" href="{{page_path 'help_center'}}">Home</a></li>
+      <li class="sidebar-section" v-for="category in categories" :data-id="category.id">
+        <h4 class="sidebar-category-title" v-cloak="">{[{category.name}]}</h4>
+        <ul>
+          <li :class="['sidebar-item', isOpen(section.id)]" v-for="section in category.sections" :data-id="section.id"><span class="sidebar-item-title" @click="setActiveSection(section.id)">{[{section.name}]}</span>
+            <ul v-if="section.id === activeSection">
+              <li :class="['sidebar-item', isCurrent(article.id)]" v-for="article in section.articles"><a class="sidebar-item-link" :href="article.html_url">{[{article.title}]}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="container content">
+    <div class="article-container" id="article-container">
+      <article class="article">
+        <header class="article-header">
+          <h1 class="article-title" title="{{article.title}}">
+            {{article.title}}
+            {{#if article.internal}}<span class="icon-lock" title="{{t 'internal'}}"></span>{{/if}}
+          </h1>
+        </header>
+        <section class="article-info">
+          <div class="article-content">
+            <div class="article-body">{{article.body}}</div>
+            <div class="article-attachments">
+              <ul class="attachments">{{#each attachments}}
+                <li class="attachment-item"><a href="{{url}}" target="_blank">{{name}}</a>
+                  <div class="attachment-meta meta-group"><span class="attachment-meta-item meta-data">{{size}}</span><a class="attachment-meta-item meta-data" href="{{url}}" target="_blank">Download</a></div>
+                </li>{{/each}}
+              </ul>
+            </div>
+          </div>
+        </section>
+        <footer>
+          <div class="article-footer">
+            <div class="article-nav-box"><a class="article-nav article-nav-prev" v-if="nav.prev" :href="nav.prev.html_url"><span class="article-nav-label">Prev</span><span class="article-nav-title">{[{nav.prev.title}]}</span></a></div>
+            <div class="article-nav-box"><a class="article-nav article-nav-next" v-if="nav.next" :href="nav.next.html_url"><span class="article-nav-label">Next</span><span class="article-nav-title">{[{nav.next.title}]}</span></a></div>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </div>
+  <script>sidebar.$mount("main");</script>
+</main>

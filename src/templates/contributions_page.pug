@@ -1,0 +1,45 @@
+nav.my-activities-nav.collapsible-nav
+  ul.collapsible-nav-list.container
+    | {{#if help_center.request_management_enabled}}
+    li {{link 'requests'}}
+    |     {{/if}}
+    li(aria-selected='true') {{t 'contributions'}}
+    li {{link 'subscriptions'}}
+.container
+  header.my-activities-header
+    h1 {{t 'contributions'}}
+    nav.my-activities-sub-nav.collapsible-nav
+      ul.collapsible-nav-list
+        | {{#each filters}}
+        | {{#if selected}}
+        li(aria-selected='true') {{name}}
+        |           {{else}}
+        li
+          a(href='{{url}}') {{name}}
+        |           {{/if}}
+        |         {{/each}}
+  .requests
+    | {{#if contributions}}
+    table.table.my-activities-table.contributions-table
+      thead
+        tr
+          th {{t 'title'}}
+          th {{t 'type'}}
+          th {{t 'vote_sum'}}
+          th {{t 'last_activity'}}
+          th {{t 'created'}}
+      tbody
+        | {{#each contributions}}
+        tr
+          td
+            a.striped-list-title(href='{{url}}', title='{{title}}')
+              | {{excerpt title characters=60}}
+          td {{type}}
+          td {{vote_sum}}
+          td {{date last_activity_at}}
+          td {{date created_at}}
+        |           {{/each}}
+    |     {{else}}
+    p.no-activities {{t 'no_contributions'}}
+    |     {{/if}}
+  |   {{pagination}}

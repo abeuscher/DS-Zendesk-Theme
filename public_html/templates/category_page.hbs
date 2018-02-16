@@ -1,0 +1,38 @@
+
+<main class="main-sidebar" role="main">
+  <div class="sidebar-panel" id="sidebar">
+    <ul class="sidebar">
+      <li class="sidebar-item sidebar-home"><a class="sidebar-item-title" href="{{page_path 'help_center'}}">Home</a></li>
+      <li class="sidebar-section" v-for="category in categories" :data-id="category.id">
+        <h4 class="sidebar-category-title" v-cloak="">{[{category.name}]}</h4>
+        <ul>
+          <li :class="['sidebar-item', isOpen(section.id)]" v-for="section in category.sections" :data-id="section.id"><span class="sidebar-item-title" @click="setActiveSection(section.id)">{[{section.name}]}</span>
+            <ul v-if="section.id === activeSection">
+              <li :class="['sidebar-item', isCurrent(article.id)]" v-for="article in section.articles"><a class="sidebar-item-link" :href="article.html_url">{[{article.title}]}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="container content">
+    <div class="category-container">
+      <div class="category-content">
+        <header class="page-header">
+          <h1>{{category.name}}</h1>        {{#if category.description}}
+          <p class="page-header-description">{{category.description}}</p>        {{/if}}
+        </header>
+        <div class="section-tree">{{#each sections}}
+          <section class="section">
+            <h3 class="section-tree-title"><a href="{{url}}">{{name}}</a>              {{#if internal}}<span class="icon-lock" title="{{t 'internal'}}"></span>              {{/if}}</h3>            {{#if articles}}
+            <ul class="article-list">{{#each articles}}
+              <li class="article-list-item{{#if promoted}} article-promoted{{/if}}">{{#if promoted}}<span class="icon-star" data-title="{{t 'promoted'}}"></span>                    {{/if}}<a class="article-list-link" href="{{url}}">{{title}}</a></li>                {{/each}}
+            </ul>              {{#if more_articles}}<a class="see-all-articles" href="{{url}}">{{t 'show_all_articles' count=article_count}}</a>              {{/if}}
+                        {{else}}<i class="section-empty"><a href="{{url}}">{{t 'empty'}}</a></i>            {{/if}}
+          </section>        {{else}}<i class="category-empty"><a href="{{category.url}}">{{t 'empty'}}</a></i>        {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>sidebar.$mount("main");</script>
+</main>

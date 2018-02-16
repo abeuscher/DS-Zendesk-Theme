@@ -1,0 +1,86 @@
+nav.my-activities-nav.collapsible-nav
+  ul.collapsible-nav-list.container
+    li(aria-selected='true') {{t 'requests'}}
+    li {{link 'contributions'}}
+    li {{link 'subscriptions'}}
+.container
+  header.my-activities-header
+    h1 {{t 'my_requests'}}
+    nav.my-activities-sub-nav.collapsible-nav
+      ul.collapsible-nav-list
+        | {{#each filters}}
+        | {{#if selected}}
+        li(aria-selected='true') {{name}}
+        |           {{else}}
+        li
+          a(href='{{url}}') {{name}}
+        |           {{/if}}
+        |         {{/each}}
+  |   {{#form 'requests_filter' class='requests-table-toolbar'}}
+  .search
+    | {{input 'query' id='quick-search' type='search' class='requests-search'}}
+  |     {{#if help_center.multiple_organizations_enabled}}
+  .request-table-filter
+    | {{label 'organization' for='request-organization-select' class='request-filter request-filter-label'}}
+    | {{select 'organization' id='request-organization-select' class='request-filter'}}
+  |     {{/if}}
+  .request-table-filter
+    | {{subscribe}}
+  .request-table-filter
+    | {{label 'status' for='request-status-select' class='request-filter request-filter-label'}}
+    | {{select 'status' id='request-status-select' class='request-filter'}}
+  |   {{/form}}
+  |   {{#if query}}
+  .requests-search-info.meta-data
+    | {{t 'requests_search_results_info' count=requests.length query=query}}
+  |   {{else}}
+  |     {{#unless requests}}
+  p.no-activities {{t 'no_requests'}}
+  |     {{/unless}}
+  |   {{/if}}
+  .requests
+    | {{#if requests}}
+    table.table.my-activities-table.requests-table(class='{{current_filter.identifier}}-requests')
+      thead
+        tr
+          th {{t 'subject'}}
+          th {{t 'id'}}
+          th
+            | {{#is current_filter.identifier 'my'}}
+            | {{#link 'requests' sort_by='created_at'}}{{t 'created'}}{{/link}}
+            | {{else}}
+            | {{t 'requester'}}
+            | {{/is}}
+          th {{#link 'requests' sort_by='updated_at'}}{{t 'last_activity'}}{{/link}}
+          th
+            | {{t 'status'}}
+      tbody
+        | {{#each requests}}
+        tr(class="{{#is status 'closed'}}request-closed{{/is}}")
+          td.request-info.requests-table-info
+            a.striped-list-title(href='{{url}}', title='{{subject}}')
+              | {{#if subject}}
+              | {{subject}}
+              | {{else}}
+              | {{excerpt description characters=50}}
+              | {{/if}}
+            // Visible on mobile
+            .requests-table-meta.meta-group
+              span.meta-data \#{{id}}
+              span.meta-data {{date created_at timeago=true}}
+              span.status-label(class='status-label-{{status}}', title='{{status_description}}')
+                | {{status_name}}
+          td \#{{id}}
+          td
+            | {{#is ../current_filter.identifier 'my'}}
+            | {{date created_at timeago=true}}
+            | {{else}}
+            | {{requester.name}}
+            | {{/is}}
+          td {{date updated_at timeago=true}}
+          td.requests-table-status
+            span.status-label(class='status-label-{{status}}', title='{{status_description}}')
+              | {{status_name}}
+        |           {{/each}}
+    |     {{/if}}
+  |   {{pagination}}

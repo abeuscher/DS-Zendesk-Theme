@@ -1,0 +1,11 @@
+.container
+  nav.sub-nav
+  h1
+    | {{t 'submit_a_request'}}
+    | {{#if follow_up}}
+    span.follow-up-hint
+      | {{follow_up}}
+    | {{/if}}
+  .form
+    | {{request_form}}
+  | {{chat}}

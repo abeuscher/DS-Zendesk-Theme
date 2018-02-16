@@ -1,0 +1,9 @@
+app
+logs
+node_modules
+!/.DS_Store
+.DS_Store
+/src/templates/list-pages.pug
+yarn.lock
+npm-debug.log
+yarn-error.log

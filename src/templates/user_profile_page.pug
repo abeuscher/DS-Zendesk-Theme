@@ -1,0 +1,210 @@
+header.profile-header
+  .container
+    .profile-info
+      .avatar.profile-avatar
+        | {{#if user.agent}}
+        span.icon-agent
+        |         {{/if}}
+        img.user-avatar(src='{{user.avatar_url}}', alt='Avatar')
+      .basic-info
+        h1.name
+          | {{#if user.url}}
+          a(href='{{user.url}}', target='_zendesk_lotus', title="{{t 'open_user_in_support'}}") {{user.name}}
+          |           {{else}}
+          |             {{user.name}}
+          |           {{/if}}
+      .options
+        | {{#if private_profile}}
+        span.profile-private-badge {{t 'private'}}
+        |         {{/if}}
+        |         {{edit}}
+        .community-follow {{subscribe}}
+      |       {{#if description}}
+      p.description {{description}}
+      |       {{/if}}
+      ul.profile-stats.profile-stats-activity
+        li.stat
+          span.stat-label {{t 'total_activity'}}
+          span.stat-value {{total_activity}}
+        li.stat
+          span.stat-label {{t 'last_activity'}}
+          span.stat-value
+            | {{#if last_activity_at}}
+            | {{date last_activity_at timeago=true}}
+            | {{else}}
+            | {{t 'no_activity_yet'}}
+            | {{/if}}
+        li.stat
+          span.stat-label {{t 'member_since'}}
+          span.stat-value
+            | {{#if member_since}}
+            | {{date member_since format='medium'}}
+            | {{else}}
+            | {{t 'no_activity_yet'}}
+            | {{/if}}
+    ul.profile-stats.profile-stats-counters
+      li.stat
+        span.stat-label {{t 'following_users'}}
+        span.stat-value {{t 'users_count' count=following_count}}
+      li.stat
+        span.stat-label {{t 'followed_by'}}
+        span.stat-value {{t 'users_count' count=follower_count}}
+      li.stat
+        span.stat-label {{t 'votes'}}
+        span.stat-value {{vote_count}}
+      li.stat
+        span.stat-label {{t 'subscriptions'}}
+        span.stat-value {{subscription_count}}
+| {{#if visible}}
+|   {{#if member_since}}
+nav.profile-nav.collapsible-nav
+  ul.collapsible-nav-list.container
+    | {{#each filters}}
+    | {{#if selected}}
+    li(aria-selected='true') {{name}}
+    |           {{else}}
+    li
+      a(href='{{url}}') {{name}}
+    |           {{/if}}
+    |         {{/each}}
+|     {{#is filter_by 'activities'}}
+.container
+  section.profile-section
+    | {{#if activities}}
+    header.profile-section-header
+      h2.profile-section-title {{t 'activity_overview'}}
+      span.profile-section-description {{t 'latest_activity' name=user.name}}
+    ul.profile-activity-list
+      | {{#each activities}}
+      li.profile-activity(class='profile-activity-{{type}}')
+        header.profile-activity-header
+          img.user-avatar(src='{{../user.avatar_url}}', alt='Avatar')
+          p.profile-activity-description {{label}}
+        |                   {{#with contribution}}
+        .profile-activity-contribution.profile-contribution
+          header.profile-contribution-header
+            | {{#isnt object_type 'comment'}}
+            h3.profile-contribution-title
+              a(href='{{url}}') {{title}}
+            |                         {{/isnt}}
+            |                         {{#isnt status 'none'}}
+            span.status-label(class='status-label-{{status_dasherized}}') {{status_name}}
+            |                         {{/isnt}}
+            |                         {{#if pending}}
+            span.status-label.status-label-pending {{t 'pending_approval'}}
+            |                         {{/if}}
+            |                         {{#if official}}
+            span.status-label.status-label-official {{t 'official_comment'}}
+            |                         {{/if}}
+          ol.breadcrumbs.profile-contribution-breadcrumbs
+            | {{#each path_steps}}
+            li(title='{{name}}')
+              a(href='{{url}}') {{name}}
+            |                         {{/each}}
+          p.profile-contribution-body {{excerpt body characters=200}}
+          ul.meta-group
+            | {{#is object_type 'comment'}}
+            li.meta-data
+              a.comment-link(href='{{url}}') {{t 'view_comment'}}
+            |                         {{/is}}
+            li.meta-data {{author.name}}
+            |                         {{#if editor}}
+            li.meta-data {{date edited_at timeago=true}}
+            li.meta-data
+              | {{#is object_type 'article'}}
+              | {{t 'updated'}}
+            |                             {{else}}
+            |                               {{t 'edited'}}
+            |                             {{/is}}
+      |                         {{else}}
+      li.meta-data {{date created_at timeago=true}}
+      |                         {{/if}}
+      |                         {{#each stats}}
+      li.meta-data {{label}}
+      |                         {{/each}}
+|                   {{/with}}
+|               {{/each}}
+|           {{/if}}
+|           {{#unless activities}}
+span.no-activity {{t 'no_contributions'}}
+|           {{/unless}}
+|     {{/is}}
+|     {{#isnt filter_by 'activities'}}
+.container
+  section.profile-section
+    | {{#if contributions}}
+    header.profile-section-header
+      h2.profile-section-title {{t filter_by}}
+      |               {{#if sorters}}
+      span.profile-section-description {{sorter_description}}
+      span.profile-section-sorter.dropdown
+        span.dropdown-toggle
+          | {{current_sorter.label}}
+        span.dropdown-menu(role='menu')
+          | {{#each sorters}}
+          a(href='{{url}}', aria-selected='{{selected}}', role='menuitem')
+            | {{name}}
+          |                     {{/each}}
+      |               {{/if}}
+    ul.profile-contribution-list(class='profile-{{filter_by}}')
+      | {{#each contributions}}
+      li.profile-contribution
+        header.profile-contribution-header
+          | {{#isnt object_type 'comment'}}
+          h3.profile-contribution-title
+            a(href='{{url}}') {{title}}
+          |                     {{/isnt}}
+          |                     {{#isnt status 'none'}}
+          span.status-label(class='status-label-{{status_dasherized}}') {{status_name}}
+          |                     {{/isnt}}
+          |                     {{#if pending}}
+          span.status-label.status-label-pending {{t 'pending_approval'}}
+          |                     {{/if}}
+          |                     {{#if official}}
+          span.status-label.status-label-official {{t 'official_comment'}}
+          |                     {{/if}}
+        ol.breadcrumbs.profile-contribution-breadcrumbs
+          | {{#each path_steps}}
+          li(title='{{name}}')
+            a(href='{{url}}') {{name}}
+          |                     {{/each}}
+        p.profile-contribution-body {{excerpt body characters=200}}
+        ul.meta-group
+          | {{#is object_type 'comment'}}
+          li.meta-data
+            a.comment-link(href='{{url}}') {{t 'view_comment'}}
+          |                     {{/is}}
+          li.meta-data {{author.name}}
+          |                     {{#if editor}}
+          li.meta-data {{date edited_at timeago=true}}
+          li.meta-data
+            | {{#is object_type 'article'}}
+            | {{t 'updated'}}
+          |                         {{else}}
+          |                           {{t 'edited'}}
+          |                         {{/is}}
+      |                     {{else}}
+      li.meta-data {{date created_at timeago=true}}
+      |                     {{/if}}
+      |                     {{#each stats}}
+      li.meta-data {{label}}
+      |                     {{/each}}
+    |               {{/each}}
+    |             {{pagination}}
+    |           {{/if}}
+    |           {{#unless contributions}}
+    span.no-activity {{t 'no_contributions'}}
+    |           {{/unless}}
+|     {{/isnt}}
+|   {{/if}}
+|   {{#unless member_since}}
+.container
+  section.profile-section
+    span.no-activity {{t 'no_content_yet'}}
+|   {{/unless}}
+| {{/if}}
+| {{#unless visible}}
+.container
+  section.profile-section
+    span.private-activity {{t 'private_activity'}}
+| {{/unless}}

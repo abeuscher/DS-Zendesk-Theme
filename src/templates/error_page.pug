@@ -1,0 +1,19 @@
+extends ./inc/page.pug
+block sidebar
+  include ./inc/side-nav.pug
+block content
+  .error-page
+    h1 {{t 'oops'}}
+    |   {{#is error 'unauthorized'}}
+    h2 {{link 'sign_in'}}
+    |   {{/is}}
+    |   {{#is error 'forbidden'}}
+    h2 {{t 'not_authorized'}}
+    |   {{/is}}
+    |   {{#is error 'not_found'}}
+    h2 {{t 'nonexistent_page'}}
+    p {{t 'mistyped_address_or_moved_page'}}
+    |   {{/is}}
+    |   {{#link 'help_center'}}
+    |     {{t 'back_to_homepage'}}
+    |   {{/link}}

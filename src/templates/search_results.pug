@@ -1,0 +1,39 @@
+extends ./inc/page.pug
+block sidebar
+  include ./inc/side-nav.pug
+block content
+  header.page-header
+    h1 {{t 'search_results'}}
+    p.page-header-description {{t 'results' query=query count=results_count}}
+  .search-results
+    section.search-results-column
+      | {{#if article_results}}
+      ul.search-results-list
+        | {{#each article_results}}
+        li.search-result
+          a.search-result-link(href='{{url}}') {{title}}
+          |               {{#if vote_sum}}
+          span.search-result-votes.meta-count {{vote_sum}}
+          |               {{/if}}
+          ul.meta-group
+            li
+              ol.breadcrumbs.search-result-breadcrumbs
+                | {{#each path_steps}}
+                li(title='{{name}}')
+                  a(href='{{url}}') {{name}}
+                |                     {{/each}}
+            li.meta-data
+              | {{#link 'user_profile' id=author.id}}
+              | {{author.name}}
+              | {{/link}}
+            li.meta-data {{date created_at timeago=true}}
+          .search-result-description {{text}}
+        |           {{/each}}
+      |       {{else}}
+      p
+        | {{t 'no_results' query=query}}
+        | {{#link 'help_center'}}
+        | {{t 'browse_knowledge_base'}}
+        | {{/link}}
+      |       {{/if}}
+  |   {{pagination}}

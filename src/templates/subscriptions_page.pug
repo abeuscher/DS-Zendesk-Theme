@@ -1,0 +1,45 @@
+nav.my-activities-nav.collapsible-nav
+  ul.collapsible-nav-list.container
+    | {{#if help_center.request_management_enabled}}
+    li {{link 'requests'}}
+    |     {{/if}}
+    li {{link 'contributions'}}
+    li(aria-selected='true') {{t 'following'}}
+.container
+  header.my-activities-header
+    h1 {{t 'following'}}
+  .my-activities-following-header
+    span.dropdown
+      span.dropdown-toggle
+        | {{current_filter.label}}
+      span.dropdown-menu(role='menu')
+        | {{#each filters}}
+        a(href='{{url}}', aria-selected='{{selected}}', role='menuitem')
+          | {{name}}
+        |         {{/each}}
+  .requests
+    | {{#if subscriptions}}
+    table.table.my-activities-table.subscriptions-table
+      thead
+        tr
+          th {{t 'title'}}
+          th {{t 'type'}}
+          th {{t 'subscription'}}
+          th
+      tbody
+        | {{#each subscriptions}}
+        tr
+          td
+            | {{#is type 'user'}}
+            img.user-avatar(src='{{avatar_url}}', alt='Avatar')
+            |                 {{/is}}
+            a.striped-list-title(href='{{url}}', title='{{title}}')
+              | {{excerpt title characters=60}}
+          td {{name}}
+          td {{subscribe}}
+          td.subscriptions-unsubscribe {{unsubscribe}}
+        |           {{/each}}
+    |     {{pagination}}
+    |     {{else}}
+    p.no-activities {{t 'not_following'}}
+    |     {{/if}}

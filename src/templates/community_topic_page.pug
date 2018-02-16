@@ -1,0 +1,67 @@
+.container-divider
+.container
+  nav.sub-nav
+    | {{breadcrumbs}}
+    | {{search scoped=true submit=false}}
+  header.page-header
+    h1
+      | {{topic.name}}
+      | {{#if topic.internal}}
+      span.icon-lock(title="{{t 'internal'}}")
+      |       {{/if}}
+    span.post-to-community.page-header-item
+      | {{link 'new_post' role='button' topic_id=topic.id class='button button-large'}}
+  .community-header
+    p.page-header-description {{topic.description}}
+    .community-follow
+      | {{subscribe}}
+  .topic-header
+    span.topic-filters
+      span.dropdown
+        span.dropdown-toggle
+          | {{current_filter.label}}
+        span.dropdown-menu(role='menu')
+          | {{#each filters}}
+          a(href='{{url}}', aria-selected='{{selected}}', role='menuitem')
+            | {{name}}
+          |           {{/each}}
+      span.dropdown
+        span.dropdown-toggle
+          | {{current_sorter.label}}
+        span.dropdown-menu(role='menu')
+          | {{#each sorters}}
+          a(href='{{url}}', aria-selected='{{selected}}', role='menuitem')
+            | {{name}}
+          |           {{/each}}
+  ul.posts-list.striped-list
+    | {{#each posts}}
+    li
+      .striped-list-item(class='{{#if featured}}post-featured{{/if}}')
+        span.striped-list-info
+          a.striped-list-title(href='{{url}}', title='{{title}}') {{title}}
+          span.post-overview-item
+            | {{#if pinned}}
+            span.status-label.status-label-pinned {{t 'pinned'}}
+            |               {{/if}}
+            |               {{#if featured}}
+            span.status-label.status-label-featured {{t 'featured'}}
+            |               {{/if}}
+            |               {{#is status 'none'}}
+            |               {{else}}
+            span.status-label.striped-list-status(class='status-label-{{status_dasherized}}') {{status_name}}
+            |               {{/is}}
+          ul.meta-group
+            li.meta-data {{author.name}}
+            li.meta-data {{date created_at timeago=true}}
+        .post-overview-count.striped-list-count
+          span.striped-list-count-item
+            span.striped-list-number {{vote_sum}}
+            |               {{t 'vote' count=vote_sum}}
+          span.striped-list-count-item
+            span.striped-list-number {{comment_count}}
+            |               {{t 'comment' count=comment_count}}
+    |     {{/each}}
+  |   {{pagination}}
+section.container.community-footer
+  h4 {{t 'suggest_new_post'}}
+  |   {{link 'new_post' role='button' class='button-large'}}

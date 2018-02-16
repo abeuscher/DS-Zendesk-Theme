@@ -1,0 +1,15 @@
+#sidebar.sidebar-panel
+  ul.sidebar
+    li.sidebar-item.sidebar-home
+      a.sidebar-item-title(href="{{page_path 'help_center'}}")
+        | Home
+    li.sidebar-section(v-for='category in categories', :data-id='category.id')
+      h4.sidebar-category-title(v-cloak='') {[{category.name}]}
+      ul
+        li(:class="['sidebar-item', isOpen(section.id)]", v-for='section in category.sections', :data-id='section.id')
+          span.sidebar-item-title(@click='setActiveSection(section.id)')
+            | {[{section.name}]}
+          ul(v-if='section.id === activeSection')
+            li(:class="['sidebar-item', isCurrent(article.id)]", v-for='article in section.articles')
+              a.sidebar-item-link(:href='article.html_url')
+                | {[{article.title}]}

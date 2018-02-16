@@ -1,0 +1,55 @@
+section.section.hero.community-hero
+  .hero-inner
+    | {{search submit=false class='search search-full' scoped=true}}
+.container
+  nav.sub-nav
+    | {{breadcrumbs}}
+  header.page-header.community-header
+    .page-header-item.dropdown
+      .dropdown-toggle
+        h4 {{t 'community_topics'}}
+      span.dropdown-menu(role='menu')
+        | {{#link 'topics' role='menuitem' selected='true'}}
+        | {{t 'show_topics'}}
+        | {{/link}}
+        | {{#link 'posts' role='menuitem'}}
+        | {{t 'show_all_posts'}}
+        | {{/link}}
+    span.page-header-item.post-to-community
+      | {{link 'new_post' role='button' class='button-large'}}
+  |   {{#unless topics}}
+  p {{t 'no_content'}}
+  |   {{/unless}}
+  .blocks.topics
+    ul.blocks-list.topics-list
+      | {{#each topics}}
+      li.blocks-item.topics-item(class='{{#if internal}}topics-item-internal{{/if}}')
+        a.blocks-item-link(href='{{url}}')
+          h4.blocks-item-title
+            | {{name}}
+            | {{#if internal}}
+            span.icon-lock(title="{{t 'internal'}}")
+            |                {{/if}}
+          p.blocks-item-description {{excerpt description}}
+          ul.meta-group
+            li.meta-data {{t 'post_count' count=post_count}}
+            li.meta-data {{t 'follower_count' count=follower_count}}
+      |       {{/each}}
+  |   {{pagination}}
+  |   {{#if featured_posts}}
+  section.section.community-featured-posts
+    h3 {{t 'featured_posts'}}
+    ul.promoted-articles
+      | {{#each featured_posts}}
+      li.promoted-articles-item
+        a(href='{{url}}')
+          | {{title}}
+      |         {{/each}}
+  |   {{/if}}
+  section.community-activity.activity
+    | {{#if help_center.community_enabled}}
+    | {{recent_activity scope='community'}}
+    | {{/if}}
+  section.container.community-footer
+    h4 {{t 'suggest_new_post'}}
+    |     {{link 'new_post' role='button' class='button-large'}}

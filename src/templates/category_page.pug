@@ -1,0 +1,40 @@
+extends ./inc/page.pug
+block sidebar
+  include ./inc/side-nav.pug
+block content
+  .category-container
+    .category-content
+      header.page-header
+        h1 {{category.name}}
+        |         {{#if category.description}}
+        p.page-header-description {{category.description}}
+        |         {{/if}}
+      .section-tree
+        | {{#each sections}}
+        section.section
+          h3.section-tree-title
+            a(href='{{url}}') {{name}}
+            |               {{#if internal}}
+            span.icon-lock(title="{{t 'internal'}}")
+            |               {{/if}}
+          |             {{#if articles}}
+          ul.article-list
+            | {{#each articles}}
+            li(class='article-list-item{{#if promoted}} article-promoted{{/if}}')
+              | {{#if promoted}}
+              span.icon-star(data-title="{{t 'promoted'}}")
+              |                     {{/if}}
+              a.article-list-link(href='{{url}}') {{title}}
+            |                 {{/each}}
+          |               {{#if more_articles}}
+          a.see-all-articles(href='{{url}}')
+            | {{t 'show_all_articles' count=article_count}}
+          |               {{/if}}
+          |             {{else}}
+          i.section-empty
+            a(href='{{url}}') {{t 'empty'}}
+          |             {{/if}}
+        |         {{else}}
+        i.category-empty
+          a(href='{{category.url}}') {{t 'empty'}}
+        |         {{/each}}

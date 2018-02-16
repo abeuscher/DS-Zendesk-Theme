@@ -1,0 +1,155 @@
+@import "./_variables.scss";
+$mq-support:true;
+
+
+@mixin bp($bp, $clamp: false, $prop: "min-width") {
+	$queries: ();
+	@each $bp-name, $bp-value in $bps {
+		$map-2: (#{$bp-name}: $bp-value);
+		$queries: map-merge($queries, $map-2);
+	}
+
+	$mq-cutoff: 5;
+
+	@if $mq-support {
+		$bp-width: map-get($queries, $bp);
+		$keys: map-keys($queries);
+		$bp-index: index($keys, $bp);
+		$next-bp: if(length($keys) > $bp-index, nth($keys, $bp-index + 1), null);
+		$prev-bp: if($bp-index > 1, nth($keys, $bp-index - 1), null);
+
+		@if $clamp and $prop == "min-width" and $next-bp {
+			@media only screen
+				and (min-width: #{$bp-width})
+				and (max-width: #{map-get($queries, $next-bp)})
+				{ @content; }
+		} @else if $clamp and $prop == "max-width" and $prev-bp {
+			@media only screen
+				and (max-width: #{$bp-width})
+				and (min-width: #{map-get($queries, $prev-bp)})
+				{ @content; }
+		} @else {
+			@media only screen and (#{$prop}: #{$bp-width}) { @content; }
+		}
+	} @else {
+		@if index(map-keys($queries), $bp) >= $mq-cutoff {
+			@content;
+		}
+	}
+}
+@mixin aspect-ratio($width, $height) {
+	position: relative;
+	&:after {
+		content: "";
+		display: block;
+		padding-top: $height / $width * 100%;
+	}
+
+	& > * {
+		display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+	}
+}
+@mixin no-padding($side) {
+  @if $side == "all" {
+    .no-padding {
+      padding: 0 !important;
+    }
+  }
+  @else {
+    .no-padding-#{$side} {
+      padding-#{$side}: 0 !important;
+    }
+  }
+}
+
+/*
+    Demo for this article:
+    http://blustemy.io/tooltips-with-sass-mixins/
+*/
+
+@mixin tooltip(
+        $tooltip-background-color: white,
+        $tooltip-arrow-base: 2em,
+        $tooltip-arrow-length: 1em,
+        $tooltip-border-width: 0,
+        $tooltip-border-color: transparent,
+        $tooltip-transition-out-duration: .3s
+    ) {
+    // Sizing and positioning
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    bottom: 100%; // displayed on top
+    margin-bottom: $tooltip-arrow-length;
+
+    // Text and color properties.
+    background-color: $tooltip-background-color;
+    text-align: center;
+
+    // Animated properties.
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, $tooltip-arrow-length);
+    transition:
+        visibility 0s linear $tooltip-transition-out-duration,
+        opacity $tooltip-transition-out-duration ease-in 0s,
+        transform $tooltip-transition-out-duration ease-in 0s;
+
+    // Disable events.
+    pointer-events: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 100%; left: 50%;
+        width: 0; height: 0;
+        // Draw a triangle.
+        border-top: ($tooltip-arrow-length - $tooltip-border-width) solid $tooltip-background-color;
+        border-left: ($tooltip-arrow-base / 2 - $tooltip-border-width) solid transparent;
+        border-right: ($tooltip-arrow-base / 2 - $tooltip-border-width) solid transparent;
+        // Center the triangle.
+        margin-left: ($tooltip-border-width - $tooltip-arrow-base / 2);
+    }
+
+    // Specific styles when the tooltip has a border
+    @if $tooltip-border-width {
+        border: $tooltip-border-width solid $tooltip-border-color;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            width: 0; height: 0;
+            // Draw another triangle to simulate a border.
+            border-top: $tooltip-arrow-length solid $tooltip-border-color;
+            border-left: ($tooltip-arrow-base / 2) solid transparent;
+            border-right: ($tooltip-arrow-base / 2) solid transparent;
+            // Center the triangle.
+            margin-left: ($tooltip-arrow-base / -2);
+        }
+    }
+}
+
+@mixin has-tooltip($tooltip-transition-in-duration: .3s) {
+    position: relative;
+    // Prevent the tooltip from being clipped by its container.
+    overflow: visible;
+
+    // Display the tooltip on hover and on focus.
+    &:hover {
+        .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, 0); // horizontally centered
+            transition:
+                visibility 0s linear 0s,
+                opacity $tooltip-transition-in-duration ease-out 0s,
+                transform $tooltip-transition-in-duration ease-out 0s;
+        }
+    }
+}

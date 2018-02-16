@@ -1,0 +1,147 @@
+nav.my-activities-nav.collapsible-nav
+  ul.collapsible-nav-list.container
+    li(aria-selected='true') {{t 'requests'}}
+    li {{link 'contributions'}}
+    li {{link 'subscriptions'}}
+.container
+  .request-breadcrumbs {{breadcrumbs}}
+  h2.request-title {{request.subject}}
+  .request-container
+    section.request-main
+      | {{satisfaction}}
+      ul.comment-list
+        | {{#each comments}}
+        li.comment(id='{{anchor}}')
+          .comment-wrapper
+            .comment-info
+              .comment-author
+                .avatar.comment-avatar
+                  | {{#if author.agent}}
+                  span.icon-agent
+                  |                     {{/if}}
+                  img.user-avatar(src='{{author.avatar_url}}', alt='Avatar')
+                .comment-meta
+                  span(title='{{author.name}}')
+                    | {{#link 'user_profile' id=author.id}}
+                    | {{author.name}}
+                    | {{/link}}
+                  ul.meta-group
+                    li.meta-data {{date created_at timeago=true}}
+              section.comment-body {{body}}
+              |                 {{#if attachments}}
+              ul.attachments
+                | {{#each attachments}}
+                li.attachment-item
+                  a(href='{{url}}', target='_blank') {{name}}
+                  .attachment-meta.meta-group
+                    span.attachment-meta-item.meta-data {{size}}
+                    a.attachment-meta-item.meta-data(href='{{url}}', target='_blank') {{t 'download'}}
+                |                     {{/each}}
+              |                 {{/if}}
+        |         {{/each}}
+      |       {{pagination}}
+      |       {{#if comment_callout}}
+      .request-follow-up
+        | {{comment_callout}}
+      |       {{/if}}
+      |       {{#form 'comment' class='comment-form'}}
+      .avatar.comment-avatar
+        | {{user_avatar class='user-avatar'}}
+      .comment-container
+        .comment-show-container(class="{{#validate 'body'}}hidden{{/validate}}")
+          span.comment-show-container-content
+            | {{t 'add_to_conversation'}}
+        .comment-fields(class="{{#validate 'body'}}shown{{/validate}}")
+          | {{#if help_center.request_ccs_enabled}}
+          .comment-ccs.form-field
+            | {{token_field 'ccs' class='ccs-input'}}
+          |             {{/if}}
+          |             {{textarea 'body' rows='7'}}
+          |             {{#if upload}}
+          .comment-attachments
+            | {{upload}}
+          |             {{/if}}
+        .comment-form-controls
+          | {{checkbox 'mark_as_solved'}}
+          | {{#if request.can_be_marked_as_solved}}
+          a.button-large.button-secondary.mark-as-solved(role='button', data-solve-translation="{{t 'mark_as_solved'}}", data-solve-and-submit-translation="{{t 'mark_as_solved_and_submit'}}")
+            | {{t 'mark_as_solved'}}
+          |             {{/if}}
+          span.request-submit-comment(class="{{#validate 'body'}}shown{{/validate}}")
+            | {{input type='submit'}}
+      |       {{/form}}
+    section.request-sidebar.collapsible-sidebar
+      h5.collapsible-sidebar-title {{t 'ticket_details'}}
+      |       {{#if request.followup_source_id}}
+      dl.request-details
+        dt {{t 'followup'}}
+        dd {{link 'request' id=request.followup_source_id}}
+      |       {{/if}}
+      dl.request-details
+        dt {{t 'requester'}}
+        dd {{request.requester.name}}
+        dt {{t 'created'}}
+        dd {{date request.created_at}}
+        dt {{t 'last_activity'}}
+        dd {{date request.updated_at}}
+        |         {{#if collaborators}}
+        dt {{t 'ccs'}}
+        dd
+          ul.request-collaborators
+            | {{#each collaborators}}
+            li(title='{{name}}') {{name}}
+            |               {{/each}}
+        |         {{/if}}
+      dl.request-details
+        | {{#if assignee}}
+        dt {{t 'assignee'}}
+        dd
+          | {{assignee.name}}
+        |         {{/if}}
+        dt {{t 'id'}}
+        dd \#{{request.id}}
+        |         {{#form 'organization' id='request-organization'}}
+        dt {{t 'organization'}}
+        dd {{select 'organization'}}
+        |         {{/form}}
+        |         {{#if group}}
+        dt {{t 'group'}}
+        dd
+          | {{group.name}}
+        |         {{/if}}
+        dt {{t 'status'}}
+        dd
+          span.status-label(class='status-label-{{request.status}}', title='{{request.status_description}}')
+            | {{request.status_name}}
+        |         {{#if request.type}}
+        dt {{t 'type'}}
+        dd
+          | {{request.type_name}}
+          | {{#is request.type 'task'}}
+          | {{t 'task_due_date' due_date=request.due_date}}
+          | {{/is}}
+        |         {{/if}}
+        |         {{#if request.priority}}
+        dt {{t 'priority'}}
+        dd
+          | {{request.priority_name}}
+        |         {{/if}}
+        |         {{#each custom_fields}}
+        dt {{title}}
+        dd
+          | {{value}}
+        |         {{/each}}
+      |       {{#if attachments}}
+      dl.request-details.request-attachments
+        dt {{t 'attachments_heading'}}
+        dd
+          ul.attachments
+            | {{#each attachments}}
+            li.attachment-item
+              a(href='{{url}}', target='_blank') {{name}}
+              .attachment-meta.meta-group
+                span.attachment-meta-item.meta-data {{size}}
+                a.attachment-meta-item.meta-data(href='{{url}}', target='_blank') {{t 'download'}}
+            |               {{/each}}
+      |       {{/if}}
+  |   {{chat_about_my_ticket}}

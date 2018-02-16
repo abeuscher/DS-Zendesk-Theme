@@ -1,0 +1,17 @@
+/*!
+Theme Name: DynamicSignal-New
+Theme URI: http://dynamicsignal.com
+Author: Al Beuscher
+Author URI: http://alexbeuscher.com/
+Description: Theme for dynamicsignal.com. Uses ACF for custom fields, NPM for packaging, and Pug templating. See readme file for installation instructions.
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: dynamicsignal
+*/
+@import "./_normalize.scss";
+@import "./_variables.scss";
+@import "./_sass-mixins.scss";
+$fa-font-path: $font-path;
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "./_base.scss";

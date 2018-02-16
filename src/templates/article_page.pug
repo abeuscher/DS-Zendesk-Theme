@@ -1,0 +1,34 @@
+extends ./inc/page.pug
+block sidebar
+  include ./inc/side-nav.pug
+block content
+  #article-container.article-container
+    article.article
+      header.article-header
+        h1.article-title(title='{{article.title}}')
+          | {{article.title}}
+          | {{#if article.internal}}
+          span.icon-lock(title="{{t 'internal'}}")
+          | {{/if}}
+      section.article-info
+        .article-content
+          .article-body {{article.body}}
+          .article-attachments
+            ul.attachments
+              | {{#each attachments}}
+              li.attachment-item
+                a(href='{{url}}', target='_blank') {{name}}
+                .attachment-meta.meta-group
+                  span.attachment-meta-item.meta-data {{size}}
+                  a.attachment-meta-item.meta-data(href='{{url}}', target='_blank') Download
+              | {{/each}}
+      footer
+        .article-footer
+          .article-nav-box
+            a.article-nav.article-nav-prev(v-if='nav.prev', :href='nav.prev.html_url')
+              span.article-nav-label Prev
+              span.article-nav-title {[{nav.prev.title}]}
+          .article-nav-box
+            a.article-nav.article-nav-next(v-if='nav.next', :href='nav.next.html_url')
+              span.article-nav-label Next
+              span.article-nav-title {[{nav.next.title}]}

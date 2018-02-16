@@ -1,0 +1,33 @@
+
+<main class="main-sidebar" role="main">
+  <div class="sidebar-panel" id="sidebar">
+    <ul class="sidebar">
+      <li class="sidebar-item sidebar-home"><a class="sidebar-item-title" href="{{page_path 'help_center'}}">Home</a></li>
+      <li class="sidebar-section" v-for="category in categories" :data-id="category.id">
+        <h4 class="sidebar-category-title" v-cloak="">{[{category.name}]}</h4>
+        <ul>
+          <li :class="['sidebar-item', isOpen(section.id)]" v-for="section in category.sections" :data-id="section.id"><span class="sidebar-item-title" @click="setActiveSection(section.id)">{[{section.name}]}</span>
+            <ul v-if="section.id === activeSection">
+              <li :class="['sidebar-item', isCurrent(article.id)]" v-for="article in section.articles"><a class="sidebar-item-link" :href="article.html_url">{[{article.title}]}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="container content">
+    <div class="error-page">
+      <h1>{{t 'oops'}}</h1>  {{#is error 'unauthorized'}}
+      <h2>{{link 'sign_in'}}</h2>  {{/is}}
+        {{#is error 'forbidden'}}
+      <h2>{{t 'not_authorized'}}</h2>  {{/is}}
+        {{#is error 'not_found'}}
+      <h2>{{t 'nonexistent_page'}}</h2>
+      <p>{{t 'mistyped_address_or_moved_page'}}</p>  {{/is}}
+        {{#link 'help_center'}}
+          {{t 'back_to_homepage'}}
+        {{/link}}
+    </div>
+  </div>
+  <script>sidebar.$mount("main");</script>
+</main>

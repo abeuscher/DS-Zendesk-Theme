@@ -1,0 +1,137 @@
+.container-divider
+.container
+  nav.sub-nav
+    | {{breadcrumbs}}
+    | {{search scoped=true submit=false}}
+  .post-container
+    .post
+      article
+        header.post-header
+          .post-title
+            h1(title='{{post.title}}')
+              | {{post.title}}
+              | {{#if post.internal}}
+              span.icon-lock(title="{{t 'internal'}}")
+              |               {{/if}}
+            |             {{#if post.pinned}}
+            span.status-label.status-label-pinned {{t 'pinned'}}
+            |             {{/if}}
+            |             {{#if post.featured}}
+            span.status-label.status-label-featured {{t 'featured'}}
+            |             {{/if}}
+            |             {{#is post.status 'none'}}
+            |             {{else}}
+            span.status-label(class='status-label-{{post.status_dasherized}}') {{post.status_name}}
+            |             {{/is}}
+          .community-follow {{subscribe}}
+        section.post-info-container
+          .post-info
+            .post-author
+              .avatar.post-avatar
+                | {{#if post.author.agent}}
+                span.icon-agent
+                |                 {{/if}}
+                img.user-avatar(src='{{post.author.avatar_url}}', alt='Avatar')
+              .post-meta
+                span(title='{{post.author.name}}')
+                  | {{#link 'user_profile' id=post.author.id}}
+                  | {{post.author.name}}
+                  | {{/link}}
+                .post-published.meta
+                  | {{date post.created_at}}
+              |               {{#if post.pending}}
+              span.status-label.status-label-pending {{t 'pending_approval'}}
+              |               {{/if}}
+              |               {{#with post.ticket}}
+              a.status-label.escalation-badge(href='{{url}}', target='_zendesk_lotus')
+                | {{t 'request'}}{{id}}
+              |               {{/with}}
+            .post-content
+              .post-body {{post.details}}
+          .post-actions-wrapper
+            .post-vote.vote(role='radiogroup')
+              | {{#with post}}
+              | {{vote 'up' role='radio' class='vote-up'}}
+              | {{vote 'sum' class='vote-sum'}}
+              | {{vote 'down' role='radio' class='vote-down'}}
+              | {{/with}}
+            .post-actions.actions
+              | {{post.actions}}
+        footer.post-footer
+          .post-share {{share}}
+          |           {{#if comments}}
+          a.post-comment-count(href='#comment-overview')
+            span.icon-comments
+            |               {{post.comment_count}}
+          |           {{/if}}
+      section#comment-overview.comment-overview
+        h3.comment-heading
+          | {{t 'comments'}}
+        p.comment-callout {{t 'comments_count' count=post.comment_count}}
+        |           {{#if comments}}
+        .dropdown.comment-sorter
+          a.dropdown-toggle {{t 'sort_by'}}
+          span.dropdown-menu(role='menu')
+            | {{#each comment_sorters}}
+            a(aria-selected='{{selected}}', href='{{url}}', role='menuitem') {{name}}
+            |                 {{/each}}
+        |         {{/if}}
+      ul#comments.comment-list
+        | {{#each comments}}
+        li.comment(id='{{anchor}}')
+          .comment-wrapper.comment-official(class='{{#if official}} {{/if}}')
+            .comment-info
+              | {{#if official}}
+              span.comment-official.status-label.status-label-official {{t 'official_comment'}}
+              |                 {{/if}}
+              .comment-author
+                .avatar.comment-avatar
+                  | {{#if author.agent}}
+                  span.icon-agent
+                  |                     {{/if}}
+                  img.user-avatar(src='{{author.avatar_url}}', alt='Avatar')
+                .comment-meta
+                  span(title='{{author.name}}')
+                    | {{#link 'user_profile' id=author.id}}
+                    | {{author.name}}
+                    | {{/link}}
+                  span.comment-published
+                    | {{date created_at}}
+                    | {{#if editor}}
+                    | ({{t 'edited'}} {{date edited_at timeago=true class='comment-publised'}})
+                    | {{/if}}
+                |                   {{#if pending}}
+                span.comment-pending.status-label.status-label-pending {{t 'pending_approval'}}
+                |                   {{/if}}
+                |                   {{#with ticket}}
+                a.status-label.escalation-badge(href='{{url}}', target='_zendesk_lotus')
+                  | {{t 'request'}} {{id}}
+                |                   {{/with}}
+              section.comment-body {{body}}
+            .comment-actions-container
+              | {{#unless official}}
+              .comment-vote.vote(role='radiogroup')
+                | {{vote 'up' role='radio' class='vote-up'}}
+                | {{vote 'sum' class='vote-sum'}}
+                | {{vote 'down' role='radio' class='vote-down'}}
+              |                 {{/unless}}
+              .comment-actions.actions
+                | {{actions}}
+        |         {{/each}}
+      |       {{pagination}}
+      section.post-comments
+        | {{#form 'comment' class='comment-form'}}
+        .avatar.comment-avatar
+          | {{user_avatar class='user-avatar'}}
+        .comment-container
+          | {{wysiwyg 'body'}}
+          .comment-form-controls
+            | {{checkbox 'official'}}
+            | {{label 'official'}}
+            | {{input type='submit'}}
+        |         {{/form}}
+      p.comment-callout {{comment_callout}}
+    section.post-sidebar
+      h3.sidebar-title {{t 'suggest_new_post'}}
+      span.post-to-community
+        | {{link 'new_post' role='button' class='button-large'}}

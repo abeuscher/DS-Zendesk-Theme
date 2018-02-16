@@ -1,0 +1,33 @@
+.container-divider
+.container
+  nav.sub-nav
+    | {{breadcrumbs}}
+    | {{search submit=false}}
+  h1.form-header
+    | {{t 'what_is_your_post_about'}}
+  .form
+    | {{#form 'post' class='new_community_post'}}
+    .form-field.required(class="{{#required 'title'}} {{/required}}")
+      | {{label 'title'}}
+      | {{input 'title' autofocus=true}}
+      | {{#validate 'title'}}
+      .notification.notification-error.notification-inline
+        | {{error 'title'}}
+      |         {{/validate}}
+    |       {{suggestion_list class='suggestion-list'}}
+    .form-field.required(class="{{#required 'details'}} {{/required}}")
+      | {{label 'details'}}
+      | {{wysiwyg 'details'}}
+      | {{#validate 'details'}}
+      .notification.notification-error.notification-inline
+        | {{error 'details'}}
+      |         {{/validate}}
+    .form-field.required(class="{{#required 'topic'}} {{/required}}")
+      | {{label 'topic'}}
+      | {{select 'topic'}}
+      | {{#validate 'topic'}}
+      .notification.notification-error.notification-inline
+        | {{error 'topic'}}
+      |         {{/validate}}
+    footer {{input type='submit'}}
+    |     {{/form}}
