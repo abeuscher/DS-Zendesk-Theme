@@ -7,3 +7,7 @@ node_modules
 yarn.lock
 npm-debug.log
 yarn-error.log
+public_html
+public_html/*
+public_html.zip
+public_html.7z
