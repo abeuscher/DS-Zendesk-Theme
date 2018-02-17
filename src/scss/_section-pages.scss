@@ -1,0 +1,12 @@
+.section-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-content {
+  flex: 1;
+}
+
+.section-subscribe .dropdown-toggle::after {
+  display: none;
+}

@@ -128,7 +128,7 @@ gulp.task('watch-files', function() {
   gulp.watch(sassDir + '**/*.scss', ['compile-sass-autoprefixed-minified'])
   gulp.watch([jsSrcDir + '**/*.js', jsSrcDir + '*.js'], ['build-js'])
   gulp.watch([viewsSrcDir + '*.pug', viewsSrcDir + '/*/*.pug'], ['build-views']);
-  gulp.watch([miscSrcDir + "*/**", miscSrcDir + ".*"], ['move-files']);
+  gulp.watch([miscSrcDir + "*/**", miscSrcDir + ".*"], ['move-files','move-stuff']);
 });
 
 gulp.task('uglify-js', function() {
@@ -163,10 +163,10 @@ gulp.task('move-files', function() {
   gulp.src([miscSrcDir + "*/**", miscSrcDir + ".*"])
     .pipe(gulp.dest(buildDir));
 });
-gulp.task('move-thumb', function() {
-  gulp.src([srcDir + "*.png"])
+gulp.task('move-stuff', function() {
+  gulp.src([miscSrcDir + "*.png",miscSrcDir + "*.json"])
     .pipe(gulp.dest(buildDir));
 });
 
 // Default Task
-gulp.task('default', ['compile-sass-autoprefixed-minified', 'build-js', 'build-views', 'watch-files', 'move-files', 'move-thumb']);
+gulp.task('default', ['compile-sass-autoprefixed-minified', 'build-js', 'build-views', 'watch-files', 'move-files', 'move-stuff']);

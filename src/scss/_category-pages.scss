@@ -1,0 +1,64 @@
+.category-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.category-content {
+  flex: 1;
+}
+
+.section-tree {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .section-tree {
+    flex-direction: row;
+  }
+}
+
+.section-tree .section {
+  flex: initial;
+}
+
+@media (min-width: 1024px) {
+  .section-tree .section {
+    flex: 0 0 45%;
+    /* Two columns for tablet and desktop. Leaving 5% separation between columns */
+  }
+}
+
+.section-tree .icon-lock::before {
+  vertical-align: baseline;
+}
+
+.section-tree-title {
+  margin-bottom: 0;
+}
+
+.section-tree-title a {
+  color: $menu-blue;
+}
+
+.section-tree .see-all-articles {
+  display: block;
+  padding: 15px 0;
+}
+
+.article-list-item {
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  padding: 15px 0;
+}
+
+.article-list-item a {
+  color: $menu-blue;
+}
+
+.icon-star::before {
+  color: $header-blue;
+  font-size: 18px;
+}

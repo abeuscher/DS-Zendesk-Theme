@@ -1,0 +1,17 @@
+.contributions-table td:last-child {
+  color: $gray;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .contributions-table td:last-child {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+}
+
+.no-activities {
+  color: lighten($gray, 20%);
+}
