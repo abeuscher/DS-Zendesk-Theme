@@ -6,7 +6,28 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
+  position:relative;
+  &.closed {
+    width:0;
+    padding:0 5px;
+    #btn-toggle-sidebar {
+      background-color:$menu-blue;
+    }
+  }
+  #btn-toggle-sidebar {
+    position:absolute;
+    right:0;
+    width:10px;
+    top:0;
+    bottom:0;
+    color:$white;
+    background-color:$gray;
+    &:hover {
+      background-color:$header-blue;
+    }
+  }
 }
+
 
 @media (max-width: 768px) {
   .sidebar-panel {
@@ -27,14 +48,14 @@
 
 .sidebar-item-title {
   display: block;
-  color: #666;
+  color: $menu-blue;
   cursor: pointer;
   font-size: 16px;
   text-decoration: none;
 }
 
 .sidebar-item-title:hover {
-  color: #333;
+  color: $header-blue;
 }
 
 
@@ -67,12 +88,12 @@
 
 .sidebar-item-link {
   display: block;
-  color: #666;
+  color: $menu-blue;
   text-decoration: none;
 }
 
 .sidebar-item-link:hover {
-  color: #333;
+  color: $header-blue;
 }
 
 
@@ -88,8 +109,8 @@
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
-  font-family: $body-font;
-  color: #AAA;
+  font-family: $header-font;
+  color: $black;
 }
 
 

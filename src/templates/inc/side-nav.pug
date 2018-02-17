@@ -1,8 +1,8 @@
 #sidebar.sidebar-panel
+  a#btn-toggle-sidebar(href="#")
   ul.sidebar
     li.sidebar-item.sidebar-home
-      a.sidebar-item-title(href="{{page_path 'help_center'}}")
-        | Home
+      a.sidebar-item-title(href="{{page_path 'help_center'}}") Home
     li.sidebar-section(v-for='category in categories', :data-id='category.id')
       h4.sidebar-category-title(v-cloak='') {[{category.name}]}
       ul

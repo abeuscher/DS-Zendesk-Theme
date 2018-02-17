@@ -1,11 +1,15 @@
 
 <header class="header">
-  <div class="logo">{{#link 'help_center' class='logo-link' }}<img src="{{logo_url}}" alt="{{t 'logo'}}"/>{{/link}}</div>
-  <div class="nav-wrapper">
-    <nav class="user-nav" id="user-nav">
-      {{link 'new_request'}}{{user_info}}</nav>
+  <div class="inner">
+    <div class="logo">{{#link 'help_center' class='logo-link' }}<img src="{{logo_url}}" alt="{{t 'logo'}}"/>{{/link}}</div>
+    <div class="nav-wrapper">
+      <nav class="user-nav" id="user-nav">
+         {{link 'new_request'}}
+        {{user_info}}
+      </nav>
+    </div>
+    <div class="search-wrapper">{{search submit=false instant=true}}</div>
   </div>
-  <div class="search-wrapper">{{search submit=false instant=true}}</div>
+  <div class="mobile-search-wrapper">{{search submit=false instant=true}}</div>
+  <div class="alertbox"></div>
 </header>
-<div class="mobile-search-wrapper">{{search submit=false instant=true}}</div>
-<div class="alertbox"></div>

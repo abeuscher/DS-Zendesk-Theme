@@ -1,6 +1,6 @@
 
 <main class="main-sidebar" role="main">
-  <div class="sidebar-panel" id="sidebar">
+  <div class="sidebar-panel" id="sidebar"><a id="btn-toggle-sidebar" href="#"></a>
     <ul class="sidebar">
       <li class="sidebar-item sidebar-home"><a class="sidebar-item-title" href="{{page_path 'help_center'}}">Home</a></li>
       <li class="sidebar-section" v-for="category in categories" :data-id="category.id">
@@ -32,5 +32,4 @@
       </section>
     </div>
   </div>
-  <script>sidebar.$mount("main");</script>
 </main>

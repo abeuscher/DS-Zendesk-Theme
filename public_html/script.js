@@ -1,129 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-// Custom delimiter for Vue templates
-Vue.options.delimiters = ['{[{', '}]}'];
 
 
-var sidebar = new Vue({
-  data: {
-    isArticle: false,
-    categories: [],
-    sections: [],
-    articles: [],
-    currentArticle: null,
-    activeSection: null,
-    nav: {
-      prev: null,
-      next: null,
-    }
-  },
-
-  created: function() {
-    $("main").addClass("main-sidebar");
-    this.isArticle = window.location.pathname.indexOf("/articles/") > -1;
-    this.fetchData();
-  },
-
-  methods: {
-
-    isOpen: function(id) {
-      return id == this.activeSection ? 'open' : '';
-    },
-
-    isCurrent: function(id) {
-      var currentId = this._getPageId(window.location.href);
-      return id == currentId ? 'current' : '';
-    },
-
-    fetchData: function(url) {
-      var url = url || "/api/v2/help_center/" + this._getLocale() + "/articles.json?per_page=100&include=sections,categories";
-
-      $.get(url, function(data){
-        if (data.count) {
-          this.categories = _.sortBy(_.uniq(this.categories.concat(data.categories), "id"), "position");
-          this.sections = _.sortBy(_.uniq(this.sections.concat(data.sections), "id"), "position");
-          this.articles = _.sortBy(_.uniq(this.articles.concat(data.articles), "id"), "position");
-
-          this.mapArticlesToSections(this.articles, this.sections);
-          this.mapSectionsToCategories(this.sections, this.categories);
-
-          // Set current article and nav links if on article page
-          if (this.isArticle) {
-            this.currentArticle = this.getCurrentArticle(this.articles);
-            if (this.currentArticle) {
-              this.activeSection = this.currentArticle.section_id;
-              this.setNavLinks(this.sections, this.currentArticle);
-            }
-          }
-
-          if (data.next_page) {
-            this.fetchData(data.next_page + "&per_page=100");
-          }
-        }
-      }.bind(this));
-    },
-
-    mapArticlesToSections: function(articles, sections) {
-      var articleGroups = _.groupBy(articles, "section_id");
-
-      _.each(sections, function(section){
-        section.articles = articleGroups[section.id];
-      }, this);
-    },
-
-    mapSectionsToCategories: function(sections, categories) {
-      var sectionGroups = _.groupBy(sections, "category_id");
-
-      _.each(categories, function(category){
-        category.sections = sectionGroups[category.id];
-      }, this);
-    },
-
-    setActiveSection: function(sectionId) {
-      if (sectionId === this.activeSection) {
-        this.activeSection = null;
-      } else {
-        this.activeSection = sectionId;
-      }
-    },
-
-    getCurrentArticle: function(articles) {
-      var currArticleId = this._getPageId(window.location.href),
-          currArticle = _.find(articles, {id: currArticleId});
-
-      return currArticle;
-    },
-
-    setNavLinks: function(sections, currArticle) {
-      let currSection = _.find(sections, {id: currArticle.section_id}),
-          currArticleIndex = _.findIndex(currSection.articles, {id: currArticle.id}),
-          prevArticle,
-          nextArticle;
-
-      if (currArticleIndex !== 'undefined') {
-        this.nav.prev = currArticleIndex > 0 ? currSection.articles[currArticleIndex - 1] : null;
-        this.nav.next = currArticleIndex < currSection.articles.length ? currSection.articles[currArticleIndex + 1] : null;
-      }
-
-    },
-
-    _getLocale: function() {
-      var links = window.location.href.split("/"),
-          hcIndex = links.indexOf("hc"),
-          links2 = links[hcIndex + 1].split("?"),
-          locale = links2[0];
-
-      return locale;
-    },
-
-    _getPageId: function(url) {
-      var links = url.split("/"),
-          page = links[links.length - 1],
-          result = page.split("-")[0];
-
-      return parseInt(result,10) || null;
-    },
-  }
-});
 
 
 
@@ -232,6 +109,136 @@ $(document).ready(function() {
     e.stopPropagation();
     var isExpanded = this.getAttribute("aria-expanded") === "true";
     this.setAttribute("aria-expanded", !isExpanded);
+  });
+  // Custom delimiter for Vue templates
+  Vue.options.delimiters = ['{[{', '}]}'];
+
+
+  var sidebar = new Vue({
+    data: {
+      isArticle: false,
+      categories: [],
+      sections: [],
+      articles: [],
+      currentArticle: null,
+      activeSection: null,
+      nav: {
+        prev: null,
+        next: null,
+      }
+    },
+
+    created: function() {
+      $("main").addClass("main-sidebar");
+      this.isArticle = window.location.pathname.indexOf("/articles/") > -1;
+      this.fetchData();
+    },
+
+    methods: {
+
+      isOpen: function(id) {
+        return id == this.activeSection ? 'open' : '';
+      },
+
+      isCurrent: function(id) {
+        var currentId = this._getPageId(window.location.href);
+        return id == currentId ? 'current' : '';
+      },
+
+      fetchData: function(url) {
+        var url = url || "/api/v2/help_center/" + this._getLocale() + "/articles.json?per_page=100&include=sections,categories";
+
+        $.get(url, function(data){
+          if (data.count) {
+            this.categories = _.sortBy(_.uniq(this.categories.concat(data.categories), "id"), "position");
+            this.sections = _.sortBy(_.uniq(this.sections.concat(data.sections), "id"), "position");
+            this.articles = _.sortBy(_.uniq(this.articles.concat(data.articles), "id"), "position");
+
+            this.mapArticlesToSections(this.articles, this.sections);
+            this.mapSectionsToCategories(this.sections, this.categories);
+
+            // Set current article and nav links if on article page
+            if (this.isArticle) {
+              this.currentArticle = this.getCurrentArticle(this.articles);
+              if (this.currentArticle) {
+                this.activeSection = this.currentArticle.section_id;
+                this.setNavLinks(this.sections, this.currentArticle);
+              }
+            }
+
+            if (data.next_page) {
+              this.fetchData(data.next_page + "&per_page=100");
+            }
+          }
+        }.bind(this));
+      },
+
+      mapArticlesToSections: function(articles, sections) {
+        var articleGroups = _.groupBy(articles, "section_id");
+
+        _.each(sections, function(section){
+          section.articles = articleGroups[section.id];
+        }, this);
+      },
+
+      mapSectionsToCategories: function(sections, categories) {
+        var sectionGroups = _.groupBy(sections, "category_id");
+
+        _.each(categories, function(category){
+          category.sections = sectionGroups[category.id];
+        }, this);
+      },
+
+      setActiveSection: function(sectionId) {
+        if (sectionId === this.activeSection) {
+          this.activeSection = null;
+        } else {
+          this.activeSection = sectionId;
+        }
+      },
+
+      getCurrentArticle: function(articles) {
+        var currArticleId = this._getPageId(window.location.href),
+            currArticle = _.find(articles, {id: currArticleId});
+
+        return currArticle;
+      },
+
+      setNavLinks: function(sections, currArticle) {
+        let currSection = _.find(sections, {id: currArticle.section_id}),
+            currArticleIndex = _.findIndex(currSection.articles, {id: currArticle.id}),
+            prevArticle,
+            nextArticle;
+
+        if (currArticleIndex !== 'undefined') {
+          this.nav.prev = currArticleIndex > 0 ? currSection.articles[currArticleIndex - 1] : null;
+          this.nav.next = currArticleIndex < currSection.articles.length ? currSection.articles[currArticleIndex + 1] : null;
+        }
+
+      },
+
+      _getLocale: function() {
+        var links = window.location.href.split("/"),
+            hcIndex = links.indexOf("hc"),
+            links2 = links[hcIndex + 1].split("?"),
+            locale = links2[0];
+
+        return locale;
+      },
+
+      _getPageId: function(url) {
+        var links = url.split("/"),
+            page = links[links.length - 1],
+            result = page.split("-")[0];
+
+        return parseInt(result,10) || null;
+      },
+    }
+  });
+  sidebar.$mount("main");
+  $("#btn-toggle-sidebar").on("click", function(e) {
+    e.preventDefault();
+    $("#sidebar").toggleClass("closed");
   });
 });
 

@@ -2,7 +2,7 @@ nav.my-activities-nav.collapsible-nav
   ul.collapsible-nav-list.container
     | {{#if help_center.request_management_enabled}}
     li {{link 'requests'}}
-    |     {{/if}}
+    | {{/if}}
     li(aria-selected='true') {{t 'contributions'}}
     li {{link 'subscriptions'}}
 .container
@@ -13,11 +13,11 @@ nav.my-activities-nav.collapsible-nav
         | {{#each filters}}
         | {{#if selected}}
         li(aria-selected='true') {{name}}
-        |           {{else}}
+        | {{else}}
         li
           a(href='{{url}}') {{name}}
-        |           {{/if}}
-        |         {{/each}}
+        | {{/if}}
+        | {{/each}}
   .requests
     | {{#if contributions}}
     table.table.my-activities-table.contributions-table
@@ -38,8 +38,8 @@ nav.my-activities-nav.collapsible-nav
           td {{vote_sum}}
           td {{date last_activity_at}}
           td {{date created_at}}
-        |           {{/each}}
-    |     {{else}}
+        | {{/each}}
+    | {{else}}
     p.no-activities {{t 'no_contributions'}}
-    |     {{/if}}
-  |   {{pagination}}
+    | {{/if}}
+  | {{pagination}}

@@ -1,7 +1,7 @@
 
 <nav class="my-activities-nav collapsible-nav">
   <ul class="collapsible-nav-list container">{{#if help_center.request_management_enabled}}
-    <li>{{link 'requests'}}</li>    {{/if}}
+    <li>{{link 'requests'}}</li>{{/if}}
     <li aria-selected="true">{{t 'contributions'}}</li>
     <li>{{link 'subscriptions'}}</li>
   </ul>
@@ -13,9 +13,9 @@
       <ul class="collapsible-nav-list">
         {{#each filters}}
         {{#if selected}}
-        <li aria-selected="true">{{name}}</li>          {{else}}
-        <li><a href="{{url}}">{{name}}</a></li>          {{/if}}
-                {{/each}}
+        <li aria-selected="true">{{name}}</li>{{else}}
+        <li><a href="{{url}}">{{name}}</a></li>{{/if}}
+        {{/each}}
       </ul>
     </nav>
   </header>
@@ -37,9 +37,9 @@
           <td>{{vote_sum}}</td>
           <td>{{date last_activity_at}}</td>
           <td>{{date created_at}}</td>
-        </tr>          {{/each}}
+        </tr>{{/each}}
       </tbody>
-    </table>    {{else}}
-    <p class="no-activities">{{t 'no_contributions'}}</p>    {{/if}}
-  </div>  {{pagination}}
+    </table>{{else}}
+    <p class="no-activities">{{t 'no_contributions'}}</p>{{/if}}
+  </div>{{pagination}}
 </div>

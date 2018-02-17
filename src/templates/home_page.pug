@@ -1,10 +1,6 @@
 extends ./inc/page.pug
 block sidebar
-  include ./inc/side-nav.pug
 block content
-  .community-image
-  h1.home-title Dynamic Signal Support Center
-  p.home-desc Get familiar with the Dynamic Signal Platform.
   section.section.knowledge-base
     section.categories.blocks
       ul.blocks-list
@@ -14,23 +10,21 @@ block content
           a.blocks-item-link(href='{{url}}')
             h3.blocks-item-title {{name}}
             p.blocks-item-description {{excerpt description}}
-        |           {{else}}
-        |             {{#each sections}}
+        | {{else}}
+        | {{#each sections}}
         li.blocks-item(class='{{#if internal}}blocks-item-internal{{/if}}')
           a.blocks-item-link(href='{{url}}')
             h3.blocks-item-title
               | {{name}}
               | {{#if internal}}
               span.icon-lock(title="{{t 'internal'}}")
-              |                     {{/if}}
+              | {{/if}}
             p.blocks-item-description {{excerpt description}}
-        |             {{/each}}
-        |           {{/if}}
-        |         {{/each}}
-      |       {{pagination}}
+        | {{/each}}
+        | {{/if}}
+        | {{/each}}
+      | {{pagination}}
   section.section.support
     h3 Still have questions?
-    p
-      | We're happy to help with whatever questions you have! You can reach out to us by chat or 
-      a(href="{{page_path 'new_request'}}") submit a support request
-      | !
+    p We're happy to help with whatever questions you have! You can reach out to us by chat or 
+      a(href="{{page_path 'new_request'}}") submit a support request!

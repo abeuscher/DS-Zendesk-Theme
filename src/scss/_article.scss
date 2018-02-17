@@ -7,17 +7,14 @@
   flex: 1 0 auto;
   max-width: 100%;
 }
-
 @media (min-width: 1024px) {
-  .article {
-  }
+  .article {}
 }
 
 .article-container {
   display: flex;
   flex-direction: column;
 }
-
 @media (min-width: 1024px) {
   .article-container {
     flex-direction: row;
@@ -36,7 +33,6 @@
 .article-header h1 {
   margin: 0;
 }
-
 @media (min-width: 768px) {
   .article-header {
     flex-direction: row;
@@ -46,7 +42,6 @@
 .article-author {
   margin-bottom: 10px;
 }
-
 @media (min-width: 768px) {
   .article-title {
     flex-basis: 100%;
@@ -67,7 +62,6 @@
   /*Avoid collapsing elements in Safari (https://github.com/philipwalton/flexbugs#1-minimum-content-sizing-of-flex-items-not-honored)*/
   width: 100%;
 }
-
 @media (min-width: 768px) {
   .article [role="button"] {
     width: auto;
@@ -89,20 +83,25 @@
   max-width: 100%;
 }
 
-.article-body ul, .article-body ol {
+.article-body ol,
+.article-body ul {
   padding-left: 20px;
   list-style-position: outside;
   margin: 20px 0 20px 20px;
 }
 
-[dir="rtl"] .article-body ul, [dir="rtl"] .article-body ol {
+[dir="rtl"] .article-body ol,
+[dir="rtl"] .article-body ul {
   padding-right: 20px;
   padding-left: 0;
   margin-left: 0;
   margin-right: 20px;
 }
 
-.article-body ul > ul, .article-body ol > ol, .article-body ol > ul, .article-body ul > ol {
+.article-body ol > ol,
+.article-body ol > ul,
+.article-body ul > ol,
+.article-body ul > ul {
   margin: 0;
 }
 
@@ -114,12 +113,11 @@
   color: darken($menu-blue, 10%);
 }
 
-.article-body a:hover,
 .article-body a:active,
-.article-body a:focus {
+.article-body a:focus,
+.article-body a:hover {
   text-decoration: underline;
 }
-
 
 .article-body code {
   background: darken($menu-blue, 3%);
@@ -150,7 +148,7 @@
 }
 
 .article-content {
-  line-height: 1.6;
+  line-height: 1.8;
   margin: 0 0 40px;
   word-wrap: break-word;
 }
@@ -170,8 +168,14 @@
   min-height: 45px;
 }
 
-.article-nav:hover .article-nav-title {
-  color: #666;
+.article-nav {
+  display: inline-block;
+  padding: 3px 10px;
+
+  &:hover {
+    background: $header-blue;
+    color: $white;
+  }
 }
 
 .article-nav-label {
@@ -182,15 +186,12 @@
 .article-nav-title {
   display: none;
   font-size: 14px;
-  color: #AAA;
 }
-
 @media (min-width: 768px) {
   .article-nav-title {
     display: block;
   }
 }
-
 
 .article-nav-next {
   text-align: right;
@@ -220,7 +221,6 @@
   margin-bottom: 20px;
   padding: 0;
 }
-
 @media (min-width: 1024px) {
   .article-sidebar {
     border: 0;
@@ -235,7 +235,6 @@
   flex-direction: column;
   padding: 20px 0;
 }
-
 @media (min-width: 768px) {
   .article-relatives {
     flex-direction: row;
@@ -250,7 +249,6 @@
 .article-relatives > *:last-child {
   margin: 0;
 }
-
 @media (min-width: 768px) {
   .article-relatives > * {
     margin-right: 20px;
@@ -287,7 +285,8 @@
   /* Yes/No label*/
 }
 
-.article-vote:focus, .article-vote:active {
+.article-vote:active,
+.article-vote:focus {
   background-color: transparent;
   color: $header-blue;
 }
@@ -296,7 +295,10 @@
   background-color: $header-blue;
 }
 
-.article-vote:hover::before, .article-vote:hover::after, .article-vote[aria-selected="true"]::before, .article-vote[aria-selected="true"]::after {
+.article-vote:hover::after,
+.article-vote:hover::before,
+.article-vote[aria-selected="true"]::after,
+.article-vote[aria-selected="true"]::before {
   color: $header-blue;
 }
 
@@ -316,7 +318,6 @@
 .article-return-to-top {
   border-top: 1px solid #ddd;
 }
-
 @media (min-width: 1024px) {
   .article-return-to-top {
     display: none;
@@ -329,7 +330,8 @@
   padding: 20px 0;
 }
 
-.article-return-to-top a:hover, .article-return-to-top a:focus {
+.article-return-to-top a:focus,
+.article-return-to-top a:hover {
   text-decoration: none;
 }
 
@@ -367,7 +369,8 @@
   padding: 10px;
 }
 
-.sidenav-item.current-article, .sidenav-item:hover {
+.sidenav-item.current-article,
+.sidenav-item:hover {
   background-color: $header-blue;
   color: $white;
   text-decoration: none;
@@ -383,9 +386,9 @@
 .related-articles li {
   margin-bottom: 15px;
 }
-
 /***** Attachments *****/
 /* Styles attachments inside posts, articles and comments */
+
 .attachments .attachment-item {
   padding-left: 20px;
   position: relative;
