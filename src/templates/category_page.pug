@@ -5,6 +5,8 @@ block content
   .category-container
     .category-content
       header.page-header
+        nav.sub-nav
+          | {{breadcrumbs}}
         h1 {{category.name}}
         |         {{#if category.description}}
         p.page-header-description {{category.description}}

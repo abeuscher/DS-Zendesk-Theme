@@ -4,6 +4,8 @@ block sidebar
 block content
   #article-container.article-container
     article.article
+      nav.sub-nav
+        | {{breadcrumbs}}
       header.article-header
         h1.article-title(title='{{article.title}}')
           | {{article.title}}
