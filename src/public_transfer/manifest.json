@@ -1,7 +1,7 @@
 {
   "name": "Dynamic Signal Support Site Theme",
-  "author": "Zendesk",
-  "version": "0.0.1",
+  "author": "Al Beuscher",
+  "version": "1.0.0",
   "api_version": 1,
   "settings": [
     {
