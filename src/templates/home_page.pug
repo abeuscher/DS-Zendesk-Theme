@@ -24,6 +24,15 @@ block content
         | {{/if}}
         | {{/each}}
       | {{pagination}}
+  | {{#if promoted_articles}}
+  section.promoted-articles
+    h3 {{t 'promoted_articles'}}
+    ul.article-list.promoted-articles
+      | {{#each promoted_articles}}
+      li.promoted-articles-item
+        a(href='{{url}}') {{title}}
+      | {{/each}}
+  | {{/if}}
   section.section.support
     h3 Still have questions?
     p We're happy to help with whatever questions you have! You can reach out to us by chat or 

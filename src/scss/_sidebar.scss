@@ -44,6 +44,9 @@
 
 .sidebar-item .sidebar-item {
   margin-left: 15px;
+  &:first-child {
+    margin-top:5px;
+  }
 }
 
 .sidebar-item-title {

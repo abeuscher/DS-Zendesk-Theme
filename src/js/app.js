@@ -109,6 +109,19 @@ $(document).ready(function() {
     var isExpanded = this.getAttribute("aria-expanded") === "true";
     this.setAttribute("aria-expanded", !isExpanded);
   });
+
+// Video handler for Vimeo
+var iframes = document.querySelectorAll("iframe");
+
+for (i=0;i<iframes.length;i++) {
+  var thisFrame = iframes[i];
+  if (thisFrame.src.indexOf("vimeo")>-1) {
+    var wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper-video");
+    thisFrame.parentNode.insertBefore(wrapper, thisFrame);
+    wrapper.appendChild(thisFrame);
+  }
+}
   // Custom delimiter for Vue templates
   Vue.options.delimiters = ['{[{', '}]}'];
 

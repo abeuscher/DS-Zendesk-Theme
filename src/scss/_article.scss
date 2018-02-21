@@ -81,8 +81,22 @@
 .article-body img {
   height: auto;
   max-width: 100%;
+  width:100%;
+  &.half-right {
+    width:50%;
+    float:right;
+  }
+  &.half-left {
+    width:50%;
+    float:left;
+  }
 }
-
+.article-body hr {
+  border: 0;
+  height: 1px;
+  background:$header-blue;
+  margin:2em 0;
+}
 .article-body ol,
 .article-body ul {
   padding-left: 20px;
