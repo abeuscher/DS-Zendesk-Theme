@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 $(document).ready(function() {
 
   // social share popups
@@ -15,7 +8,7 @@ $(document).ready(function() {
 
   // show form controls when the textarea receives focus or backbutton is used and value exists
   var $commentContainerTextarea = $(".comment-container textarea"),
-  $commentContainerFormControls = $(".comment-form-controls, .comment-ccs");
+    $commentContainerFormControls = $(".comment-form-controls, .comment-ccs");
 
   $commentContainerTextarea.one("focus", function() {
     $commentContainerFormControls.show();
@@ -42,7 +35,7 @@ $(document).ready(function() {
     $requestMarkAsSolvedCheckbox = $(".request-container .comment-container input[type=checkbox]"),
     $requestCommentSubmitButton = $(".request-container .comment-container input[type=submit]");
 
-  $requestMarkAsSolvedButton.on("click", function () {
+  $requestMarkAsSolvedButton.on("click", function() {
     $requestMarkAsSolvedCheckbox.attr("checked", true);
     $requestCommentSubmitButton.prop("disabled", true);
     $(this).attr("data-disabled", true).closest("form").submit();
@@ -110,18 +103,18 @@ $(document).ready(function() {
     this.setAttribute("aria-expanded", !isExpanded);
   });
 
-// Video handler for Vimeo
-var iframes = document.querySelectorAll("iframe");
+  // Video handler for Vimeo
+  var iframes = document.querySelectorAll("iframe");
 
-for (i=0;i<iframes.length;i++) {
-  var thisFrame = iframes[i];
-  if (thisFrame.src.indexOf("vimeo")>-1) {
-    var wrapper = document.createElement("div");
-    wrapper.classList.add("wrapper-video");
-    thisFrame.parentNode.insertBefore(wrapper, thisFrame);
-    wrapper.appendChild(thisFrame);
+  for (i = 0; i < iframes.length; i++) {
+    var thisFrame = iframes[i];
+    if (thisFrame.src.indexOf("vimeo") > -1) {
+      var wrapper = document.createElement("div");
+      wrapper.classList.add("wrapper-video");
+      thisFrame.parentNode.insertBefore(wrapper, thisFrame);
+      wrapper.appendChild(thisFrame);
+    }
   }
-}
   // Custom delimiter for Vue templates
   Vue.options.delimiters = ['{[{', '}]}'];
 
@@ -160,7 +153,7 @@ for (i=0;i<iframes.length;i++) {
       fetchData: function(url) {
         var url = url || "/api/v2/help_center/" + this._getLocale() + "/articles.json?per_page=100&include=sections,categories";
 
-        $.get(url, function(data){
+        $.get(url, function(data) {
           if (data.count) {
             this.categories = _.sortBy(_.uniq(this.categories.concat(data.categories), "id"), "position");
             this.sections = _.sortBy(_.uniq(this.sections.concat(data.sections), "id"), "position");
@@ -188,7 +181,7 @@ for (i=0;i<iframes.length;i++) {
       mapArticlesToSections: function(articles, sections) {
         var articleGroups = _.groupBy(articles, "section_id");
 
-        _.each(sections, function(section){
+        _.each(sections, function(section) {
           section.articles = articleGroups[section.id];
         }, this);
       },
@@ -196,7 +189,7 @@ for (i=0;i<iframes.length;i++) {
       mapSectionsToCategories: function(sections, categories) {
         var sectionGroups = _.groupBy(sections, "category_id");
 
-        _.each(categories, function(category){
+        _.each(categories, function(category) {
           category.sections = sectionGroups[category.id];
         }, this);
       },
@@ -211,16 +204,22 @@ for (i=0;i<iframes.length;i++) {
 
       getCurrentArticle: function(articles) {
         var currArticleId = this._getPageId(window.location.href),
-            currArticle = _.find(articles, {id: currArticleId});
+          currArticle = _.find(articles, {
+            id: currArticleId
+          });
 
         return currArticle;
       },
 
       setNavLinks: function(sections, currArticle) {
-        let currSection = _.find(sections, {id: currArticle.section_id}),
-            currArticleIndex = _.findIndex(currSection.articles, {id: currArticle.id}),
-            prevArticle,
-            nextArticle;
+        let currSection = _.find(sections, {
+            id: currArticle.section_id
+          }),
+          currArticleIndex = _.findIndex(currSection.articles, {
+            id: currArticle.id
+          }),
+          prevArticle,
+          nextArticle;
 
         if (currArticleIndex !== 'undefined') {
           this.nav.prev = currArticleIndex > 0 ? currSection.articles[currArticleIndex - 1] : null;
@@ -231,19 +230,19 @@ for (i=0;i<iframes.length;i++) {
 
       _getLocale: function() {
         var links = window.location.href.split("/"),
-            hcIndex = links.indexOf("hc"),
-            links2 = links[hcIndex + 1].split("?"),
-            locale = links2[0];
+          hcIndex = links.indexOf("hc"),
+          links2 = links[hcIndex + 1].split("?"),
+          locale = links2[0];
 
         return locale;
       },
 
       _getPageId: function(url) {
         var links = url.split("/"),
-            page = links[links.length - 1],
-            result = page.split("-")[0];
+          page = links[links.length - 1],
+          result = page.split("-")[0];
 
-        return parseInt(result,10) || null;
+        return parseInt(result, 10) || null;
       },
     }
   });
@@ -253,6 +252,7 @@ for (i=0;i<iframes.length;i++) {
     $("#sidebar").toggleClass("closed");
   });
   activateImages();
+  activateAlerts();
 });
 
 function activateImages() {
@@ -264,9 +264,26 @@ function activateImages() {
     }
   }
 }
-function isElement(o){
+
+function isElement(o) {
   return (
     typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
-    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
   );
+}
+
+function activateAlerts() {
+  $.get("/api/v2/help_center/" + $('html').attr('lang').toLowerCase() + "/articles.json?label_names=alert").done(function(data) {
+
+    $.each(data.articles, function(index, item) {
+
+      var style1 = '<div class="ns-box ns-bar ns-effect-slidetop ns-type-notice ns-show"><div class="ns-box-inner"><span class="megaphone"></span></i><p><a href="' + item.html_url + '">' + item.title + '</a></p></div><span class="ns-close"></span></div>'
+
+      $('.alertbox').append(style1);
+    });
+    $('.ns-close').on('click', function() {
+      $(".alertbox").remove();
+    });
+
+  });
 }
