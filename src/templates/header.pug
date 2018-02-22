@@ -4,11 +4,11 @@ header.header
       | {{#link 'help_center' class='logo-link' }}
       img(src='{{logo_url}}', alt="{{t 'logo'}}")
       | {{/link}}
+    .search-wrapper
+      | {{search submit=false instant=true}}
     .nav-wrapper
       nav#user-nav.user-nav 
         | {{link 'new_request'}}
-        | {{user_info}}
-    .search-wrapper
-      | {{search submit=false instant=true}}
+        | {{user_info}}  
   .mobile-search-wrapper {{search submit=false instant=true}}
   .alertbox

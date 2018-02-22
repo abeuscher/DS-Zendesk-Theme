@@ -1,39 +1,39 @@
-extends ./inc/page.pug
-block sidebar
-block content
-  section.section.knowledge-base
-    section.categories.blocks
-      ul.blocks-list
-        | {{#each categories}}
-        | {{#if ../has_multiple_categories}}
-        li.blocks-item
-          a.blocks-item-link(href='{{url}}')
-            h3.blocks-item-title {{name}}
-            p.blocks-item-description {{excerpt description}}
-        | {{else}}
-        | {{#each sections}}
-        li.blocks-item(class='{{#if internal}}blocks-item-internal{{/if}}')
-          a.blocks-item-link(href='{{url}}')
-            h3.blocks-item-title
-              | {{name}}
-              | {{#if internal}}
-              span.icon-lock(title="{{t 'internal'}}")
-              | {{/if}}
-            p.blocks-item-description {{excerpt description}}
+main.main-sidebar(role='main')
+  .banner-home(data-bg="{{asset 'bg-header-home.jpg'}}")
+  .container.content
+    section.section.knowledge-base
+      section.categories.blocks
+        ul.blocks-list
+          | {{#each categories}}
+          | {{#if ../has_multiple_categories}}
+          li.blocks-item
+            a.blocks-item-link(href='{{url}}')
+              h3.blocks-item-title {{name}}
+              p.blocks-item-description {{excerpt description}}
+          | {{else}}
+          | {{#each sections}}
+          li.blocks-item(class='{{#if internal}}blocks-item-internal{{/if}}')
+            a.blocks-item-link(href='{{url}}')
+              h3.blocks-item-title
+                | {{name}}
+                | {{#if internal}}
+                span.icon-lock(title="{{t 'internal'}}")
+                | {{/if}}
+              p.blocks-item-description {{excerpt description}}
+          | {{/each}}
+          | {{/if}}
+          | {{/each}}
+        | {{pagination}}
+    | {{#if promoted_articles}}
+    section.promoted-articles
+      h3 {{t 'promoted_articles'}}
+      ul.article-list.promoted-articles
+        | {{#each promoted_articles}}
+        li.promoted-articles-item
+          a(href='{{url}}') {{title}}
         | {{/each}}
-        | {{/if}}
-        | {{/each}}
-      | {{pagination}}
-  | {{#if promoted_articles}}
-  section.promoted-articles
-    h3 {{t 'promoted_articles'}}
-    ul.article-list.promoted-articles
-      | {{#each promoted_articles}}
-      li.promoted-articles-item
-        a(href='{{url}}') {{title}}
-      | {{/each}}
-  | {{/if}}
-  section.section.support
-    h3 Still have questions?
-    p We're happy to help with whatever questions you have! You can reach out to us by chat or 
-      a(href="{{page_path 'new_request'}}") submit a support request!
+    | {{/if}}
+    section.section.support
+      h3 Still have questions?
+      p We're happy to help with whatever questions you have! You can reach out to us by chat or 
+        a(href="{{page_path 'new_request'}}") submit a support request!

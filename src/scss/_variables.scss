@@ -4,10 +4,10 @@ $local-path:"";
 $img-path:$local-path+"/images/";
 $font-path:$cdn-path+"/fonts/";
 
-$homepage_background_image : "";
-$community_image : "";
-$community_background_image : "";
-
+$homepage_background_image : default;
+$community_image : default;
+$community_background_image : default;
+$assets-bg-header-home-jpg : default;
 //Breakpoints
 $bps: (xs: 0, s:641px, m:1025px, l:1321px,xl:1921px);
 

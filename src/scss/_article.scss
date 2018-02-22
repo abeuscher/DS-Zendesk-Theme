@@ -85,10 +85,21 @@
   &.half-right {
     width:50%;
     float:right;
+    padding-left:2em;
+    padding-bottom:2em;
   }
   &.half-left {
     width:50%;
     float:left;
+    padding-right:2em;
+    padding-bottom:2em;
+  }
+  &.icon {
+    width:auto;
+    height: auto;
+    display:inline-block;
+    max-height: 1em;
+    max-width: 1em;
   }
 }
 .article-body hr {
@@ -140,7 +151,12 @@
   padding: 0 5px;
   margin: 0 2px;
 }
-
+.article-body .note {
+  display:table;
+  padding:.5em;
+  background:$light-gray;
+  font-style:italic;
+}
 .article-body pre {
   background: darken($menu-blue, 3%);
   border: 1px solid #ddd;

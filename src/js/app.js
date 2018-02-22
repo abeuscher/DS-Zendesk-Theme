@@ -252,4 +252,21 @@ for (i=0;i<iframes.length;i++) {
     e.preventDefault();
     $("#sidebar").toggleClass("closed");
   });
+  activateImages();
 });
+
+function activateImages() {
+  var backgroundImages = document.querySelectorAll("[data-bg]");
+  for (i in backgroundImages) {
+    if (isElement(backgroundImages[i])) {
+      thisElement = backgroundImages[i];
+      thisElement.style.backgroundImage = "url('" + thisElement.getAttribute("data-bg") + "')";
+    }
+  }
+}
+function isElement(o){
+  return (
+    typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+  );
+}

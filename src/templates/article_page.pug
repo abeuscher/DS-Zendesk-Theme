@@ -26,6 +26,7 @@ block content
               | {{/each}}
       footer
         .article-footer
+          | {{#isnt section.name "FAQ" }}
           .article-nav-box
             a.article-nav.article-nav-prev(v-if='nav.prev', :href='nav.prev.html_url')
               span.article-nav-label Prev
@@ -34,3 +35,4 @@ block content
             a.article-nav.article-nav-next(v-if='nav.next', :href='nav.next.html_url')
               span.article-nav-label Next
               span.article-nav-title {[{nav.next.title}]}
+          | {{/isnt}}
