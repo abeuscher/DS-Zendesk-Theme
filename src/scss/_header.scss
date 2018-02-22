@@ -1,6 +1,7 @@
 .header {
   width:100%;
   display: flex;
+  flex-wrap:wrap;
   .inner {
     display: flex;
     align-items: top;
