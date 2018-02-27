@@ -123,11 +123,12 @@
   margin-right: 20px;
 }
 
-.article-body ol > ol,
-.article-body ol > ul,
-.article-body ul > ol,
-.article-body ul > ul {
+.article-body ol ol,
+.article-body ol ul,
+.article-body ul ol,
+.article-body ul ul {
   margin: 0;
+  list-style-type: circle;
 }
 
 .article-body ul {

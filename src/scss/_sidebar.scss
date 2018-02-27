@@ -1,6 +1,9 @@
 .sidebar-panel {
   padding: 40px 30px 30px;
-  width: 320px;
+  margin:0 50px 0 0;
+  max-width: 320px;
+  flex-basis:30%;
+  flex:1;
   background: $light-gray;
   overflow-x: hidden;
   overflow-y: auto;
