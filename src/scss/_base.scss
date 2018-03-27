@@ -12,6 +12,23 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+.has-tooltip {
+    @include has-tooltip($tooltip-transition-in-duration: .3s);
+}
+.tooltip {
+    @include tooltip(
+        $tooltip-background-color: $header-blue,
+        $tooltip-arrow-base: 1.5em,
+        $tooltip-arrow-length: .75em,
+        $tooltip-border-width: .05em,
+        $tooltip-border-color: $black,
+        $tooltip-transition-out-duration: .2s
+    );
+    min-width: 12em;
+    padding: .5em .75em;
+    box-shadow: 0 .05em .15em rgba($black, .1);
+    color: $white;
+}
 .wrapper-video {
   position: relative;
   padding-bottom: 56.25%;

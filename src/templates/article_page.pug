@@ -24,6 +24,16 @@ block content
                   span.attachment-meta-item.meta-data {{size}}
                   a.attachment-meta-item.meta-data(href='{{url}}', target='_blank') Download
               | {{/each}}
+        | {{#with article}}
+        .article-vote
+          span.article-vote-question
+            | {{t 'was_this_article_helpful'}}
+          .article-vote-controls
+            | {{vote 'up' class='article-vote-up' selected_class='article-voted' role='button'}}
+            | {{vote 'down' class='article-vote-down' selected_class='article-voted' role='button'}}
+          small.article-vote-count
+            | {{vote 'label' class='article-vote-label'}}
+        | {{/with}}
       footer
         .article-footer
           | {{#isnt section.name "FAQ" }}

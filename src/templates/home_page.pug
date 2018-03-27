@@ -24,9 +24,42 @@ main.main-sidebar(role='main')
           | {{/if}}
           | {{/each}}
         | {{pagination}}
+    section.video-grid
+      h3 Recent Video Content
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px;')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001642672')
+          img(width='320px', src="\{{asset '360001642672.png'}}")
+          p ► How to Broadcast a Post (2:30)
+        p
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001691072')
+          img(width='320px', src="\{{asset '360001691072.png'}}")
+          p ► Creating Newsletters (4:16)
+        p
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001671611')
+          img(width='320px', src="\{{asset '360001671611.png'}}")
+          p ► Configuring SmartContent Feeds (2:48)
+        p
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001668671')
+          img(width='320px', src="\{{asset '360001668671.png'}}")
+          p ► Submitting Content with the Dynamic Signal mobile app (1:43)
+        p
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001648272')
+          img(width='320px', src="\{{asset '360001648272.png'}}")
+          p ► Sharing Content from the Dynamic Signal mobile app (0:42)
+        p
+      div(style='width: 320px; float: left; padding-right: 6px; padding-bottom: 10px')
+        a(href='https://dysi.zendesk.com/hc/en-us/articles/360001016112')
+          img(width='320px', src="\{{asset '360001016112.png'}}")
+          p ► Essential Manager Training (1:05:22)
+        p
+      div(style='clear: both;')
     | {{#if promoted_articles}}
     section.promoted-articles
-      h3 {{t 'promoted_articles'}}
+      h3 Promoted Articles
       ul.article-list.promoted-articles
         | {{#each promoted_articles}}
         li.promoted-articles-item
@@ -34,6 +67,6 @@ main.main-sidebar(role='main')
         | {{/each}}
     | {{/if}}
     section.section.support
-      h3 Still have questions?
-      p We're happy to help with whatever questions you have! You can reach out to us by chat or 
-        a(href="{{page_path 'new_request'}}") submit a support request!
+      h3 Still Have Questions? Contact Dynamic Signal Support.
+      p We're happy to help with whatever questions you have. 
+        a(href="{{page_path 'new_request'}}") You can submit a support request with this link.

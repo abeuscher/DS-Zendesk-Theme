@@ -8,7 +8,8 @@ header.header
       | {{search submit=false instant=true}}
     .nav-wrapper
       nav#user-nav.user-nav 
+        | {{#if signed_in}}
         | {{link 'new_request'}}
         | {{user_info}}  
-  .mobile-search-wrapper {{search submit=false instant=true}}
+        | {{/if}}
   .alertbox

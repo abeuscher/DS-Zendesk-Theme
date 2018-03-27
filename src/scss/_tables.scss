@@ -56,3 +56,37 @@
     height: 60px;
   }
 }
+
+// Dynamic Signal Table styles
+
+@mixin widthclass($prefix:"width") {
+  @for $i from 1 through 100 {
+    &.width-#{$i} {
+      flex-basis:$i * 1%;
+    }
+  }
+}
+
+.ds-table {
+  width:100%;
+
+  .header-row, .data-row {
+    display:flex;
+    width:100%;
+  }
+  .header-cell, .data-cell {
+    flex-basis:100%;
+    padding:1em;
+    @include widthclass();
+  }
+  .header-cell {
+    background:$black;
+    color:$white;
+  }
+  .data-cell {
+    &.knockout {
+      background:$menu-blue;
+      color:$white;
+    }
+  }
+}

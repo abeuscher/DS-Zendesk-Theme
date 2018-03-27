@@ -11,6 +11,28 @@
   .article {}
 }
 
+.ds-note {
+  background: $menu-blue;
+  color: $white;
+  display:block;
+  border-radius:3px;
+  padding:$gutter-width/2;
+}
+
+.ds-tip {
+  background: $header-blue;
+  color: $white;
+  border-radius:3px;
+  padding:$gutter-width;
+}
+
+.ds-caution {
+  background: $gray;
+  color: $black;
+  border-radius:3px;
+  padding:$gutter-width;
+}
+
 .article-container {
   display: flex;
   flex-direction: column;
@@ -81,37 +103,86 @@
 .article-body img {
   height: auto;
   max-width: 100%;
-  width:100%;
+  width: 100%;
+  // Correct Image Styles
+  &.no-format {
+    max-width: 100%;
+    width: auto;
+  }
+
+  &.float-right {
+    float: right;
+    padding-left: 2em;
+    padding-bottom: 2em;
+  }
+
+  &.float-left {
+    float: left;
+    padding-right: 2em;
+    padding-bottom: 2em;
+  }
+
+  &.half-width {
+    width: 50%;
+  }
+
+  &.quarter-width {
+    width: 25%;
+  }
+
+  &.three-quarter-width {
+    width: 75%;
+  }
+
+  &.centered {
+    margin: 0 auto;
+    display: block;
+  }
+  // Legacy image styles
   &.half-right {
-    width:50%;
-    float:right;
-    padding-left:2em;
-    padding-bottom:2em;
+    width: 50%;
+    float: right;
+    padding-left: 2em;
+    padding-bottom: 2em;
   }
+
   &.half-left {
-    width:50%;
-    float:left;
-    padding-right:2em;
-    padding-bottom:2em;
+    width: 50%;
+    float: left;
+    padding-right: 2em;
+    padding-bottom: 2em;
   }
+
   &.icon {
-    width:auto;
+    width: auto;
     height: auto;
-    display:inline-block;
+    display: inline-block;
     max-height: 1em;
     max-width: 1em;
   }
+
+  .quarterwh-center {
+    display: block;
+    margin: 0 auto;
+    width: 25%;
+    height: 25%;
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-bottom: 2em;
+  }
 }
+
 .article-body hr {
   border: 0;
   height: 1px;
-  background:$header-blue;
-  margin:2em 0;
+  background: $header-blue;
+  margin: 2em 0;
 }
+
 .article-body ol,
 .article-body ul {
   padding-left: 20px;
-  list-style-position: outside;
+  list-style-position: inside;
   margin: 20px 0 20px 20px;
 }
 
@@ -152,12 +223,14 @@
   padding: 0 5px;
   margin: 0 2px;
 }
+
 .article-body .note {
-  display:table;
-  padding:.5em;
-  background:$light-gray;
-  font-style:italic;
+  display: table;
+  padding: 0.5em;
+  background: $light-gray;
+  font-style: italic;
 }
+
 .article-body pre {
   background: darken($menu-blue, 3%);
   border: 1px solid #ddd;
@@ -188,8 +261,8 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  width: 100%;
-  margin-top: 60px;
+  width: 70%;
+  margin: 60px auto 0;
   padding: 20px 0;
   border-top: 1px solid #EEE;
 }
@@ -294,11 +367,18 @@
 
 .article-vote {
   background: transparent;
-  border: 1px solid $header-blue;
+  border-top: 1px solid $header-blue;
   color: $header-blue;
-  margin: 10px 5px;
   min-width: 90px;
+  padding: $gutter-width 0;
   width: auto;
+  text-align: center;
+
+  div,
+  span {
+    display: inline-block;
+    margin-right: 1em;
+  }
 }
 
 .article-vote::before {
@@ -319,17 +399,6 @@
 .article-vote:active,
 .article-vote:focus {
   background-color: transparent;
-  color: $header-blue;
-}
-
-.article-vote:hover {
-  background-color: $header-blue;
-}
-
-.article-vote:hover::after,
-.article-vote:hover::before,
-.article-vote[aria-selected="true"]::after,
-.article-vote[aria-selected="true"]::before {
   color: $header-blue;
 }
 
@@ -419,7 +488,6 @@
 }
 /***** Attachments *****/
 /* Styles attachments inside posts, articles and comments */
-
 .attachments .attachment-item {
   padding-left: 20px;
   position: relative;
