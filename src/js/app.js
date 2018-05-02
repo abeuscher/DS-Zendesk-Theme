@@ -261,6 +261,7 @@ $(document).ready(function() {
   });
   activateImages();
   activateAlerts();
+  TableHandler();
 });
 
 function activateImages() {
@@ -294,4 +295,14 @@ function activateAlerts() {
     });
 
   });
+}
+
+function TableHandler() {
+  console.log("fire table handler");
+  var tables = document.querySelectorAll(".article-body table");
+  for(i=0;i<tables.length;i++) {
+    var thisTable = tables[i];
+    console.log(thisTable, "Width:" + thisTable.style.width);
+  }
+
 }

@@ -8,8 +8,6 @@ header.header
       | {{search submit=false instant=true}}
     .nav-wrapper
       nav#user-nav.user-nav 
-        | {{#if signed_in}}
-        | {{link 'new_request'}}
+        a(href="https://dynamicsignal.desk.com/customer/portal/emails/new") Submit a Request
         | {{user_info}}  
-        | {{/if}}
   .alertbox

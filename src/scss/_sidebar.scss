@@ -11,6 +11,8 @@
   -ms-overflow-style: none;
   position:relative;
   &.closed {
+    flex-basis:0;
+    flex:0;
     width:0;
     padding:0 5px;
     #btn-toggle-sidebar {

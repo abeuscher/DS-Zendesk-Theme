@@ -1,6 +1,6 @@
 {
   "name": "dynamic-signal-support",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Zendesk Theme",
   "main": "gulpfile.js",
   "scripts": {
