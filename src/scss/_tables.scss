@@ -89,8 +89,9 @@
     }
     @include widthclass();
     p {
-      margin:0;padding:0;line-height:1;
+      margin:0;padding:0;line-height:1.8;
     }
+    line-height:1.8;
   }
   .header-cell {
     background:#ebebeb;
@@ -98,6 +99,9 @@
     text-transform:uppercase;
     color:$header-blue;
     line-height:1;
+    p {
+      line-height:1;
+    }
   }
   .data-row {
     flex-basis:100%;
