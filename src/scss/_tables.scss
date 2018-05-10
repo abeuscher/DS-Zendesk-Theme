@@ -66,9 +66,17 @@
     }
   }
 }
+@mixin tablewidthclass($prefix:"width") {
+  @for $i from 1 through 100 {
+    &.width-#{$i} {
+      width:$i * 1%;
+    }
+  }
+}
 
 .ds-table {
   width:100%;
+  @include tablewidthclass();
   .header-row, .data-row {
     display:flex;
     width:100%;

@@ -139,7 +139,6 @@ $(document).ready(function() {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
   }
-  console.log(sidebar.nav);
   $(".share a").click(function(e) {
     e.preventDefault();
     window.open(this.href, "", "height = 500, width = 500");
@@ -298,11 +297,8 @@ function activateAlerts() {
 }
 
 function TableHandler() {
-  console.log("fire table handler");
   var tables = document.querySelectorAll(".article-body table");
   for(i=0;i<tables.length;i++) {
     var thisTable = tables[i];
-    console.log(thisTable, "Width:" + thisTable.style.width);
   }
-
 }
