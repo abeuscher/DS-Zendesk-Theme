@@ -252,13 +252,13 @@
 }
 
 .article-body a:visited {
-  color: darken($menu-blue, 10%);
+  color: #000066;
 }
 
 .article-body a:active,
 .article-body a:focus,
 .article-body a:hover {
-  text-decoration: underline;
+  text-decoration: underline default;
 }
 
 .article-body code {
