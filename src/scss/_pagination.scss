@@ -31,7 +31,11 @@
   color:$white;
 }
 
-.pagination li:hover:not(.pagination-current) span, .pagination li:hover:not(.pagination-current) a {
+.pagination li:hover:not(.pagination-current) span {
+  color:$white;
+  text-decoration: none;
+} 
+.pagination li:hover:not(.pagination-current) a {
   color: $menu-blue;
   text-decoration: none;
 }
@@ -55,7 +59,7 @@
 }
 
 .pagination-current a, .pagination-current span {
-  color: $black;
+  color: $white;
 }
 
 .pagination-first {
