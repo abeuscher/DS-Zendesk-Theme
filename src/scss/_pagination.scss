@@ -27,17 +27,18 @@
 }
 
 .pagination li:hover:not(.pagination-current) {
-  background-color: #f3f3f3;
+  background-color:$header-blue;
+  color:$white;
 }
 
 .pagination li:hover:not(.pagination-current) span, .pagination li:hover:not(.pagination-current) a {
-  color: $black;
+  color: $menu-blue;
   text-decoration: none;
 }
 
 .pagination a, .pagination span {
   font-size: 15px;
-  color: lighten($gray, 20%);
+  color: $black;
   padding: 10px 12px;
 }
 
@@ -50,6 +51,7 @@
 
 .pagination-current {
   background-color: $header-blue;
+  color:$white;
 }
 
 .pagination-current a, .pagination-current span {
