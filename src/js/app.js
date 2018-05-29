@@ -1,4 +1,5 @@
-
+var Cookies = require("js-cookie");
+var parseHTML = require("./utils/parse-html.js");
 
 // Custom delimiter for Vue templates
 Vue.options.delimiters = ['{[{', '}]}'];
@@ -135,6 +136,9 @@ var sidebar = new Vue({
 
 
 $(document).ready(function() {
+  if (checkCookies()) {
+    triggerGDPR();
+  }
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
@@ -261,6 +265,7 @@ $(document).ready(function() {
   activateImages();
   activateAlerts();
   TableHandler();
+
 });
 
 function activateImages() {
@@ -302,3 +307,85 @@ function TableHandler() {
     var thisTable = tables[i];
   }
 }
+
+// GDPR Popup Code
+
+var siteSettings = {
+  "gdprCookie":"ds-gdpr",
+  "templates": {
+    "gdprPopup": require("./gdpr-popup.pug")
+  }
+}
+
+function triggerGDPR() {
+  var domain = "dynamicsignal.com";
+  if (!Cookies.get(siteSettings.gdprCookie)) {
+    var warning = parseHTML(siteSettings.templates.gdprPopup());
+    document.body.appendChild(warning);
+    var yesButton = document.getElementById("btn-yes");
+    var noButton = document.getElementById("btn-no");
+    yesButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      Cookies.set(siteSettings.gdprCookie,"true",{
+        expires: 365,
+        domain:domain
+      });
+      warning.remove();   
+      return false;
+    });
+    window.addEventListener("click", function(e) {
+      Cookies.set(siteSettings.gdprCookie,"true",{
+        expires: 365,
+        domain:domain
+      });
+      triggerGA();
+      return true;
+    });
+  }
+}
+function triggerGA() {
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQKZ8M');
+}
+function checkCookies(){
+  var cookieEnabled = navigator.cookieEnabled;
+  if (!cookieEnabled){ 
+      document.cookie = "testcookie";
+      cookieEnabled = document.cookie.indexOf("testcookie")!=-1;
+  }
+  if (cookieEnabled) {
+    Cookies.remove("testcookie");
+  }
+  return cookieEnabled;
+}
+function wipeCookies() {
+
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+
+}
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('remove')) {
+      return;
+    }
+    Object.defineProperty(item, 'remove', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function remove() {
+        if (this.parentNode !== null)
+          this.parentNode.removeChild(this);
+      }
+    });
+  });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);

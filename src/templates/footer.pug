@@ -1,14 +1,11 @@
-footer.footer(style='display:none;')
+footer.footer
   .footer-inner
-    | {{#link 'help_center'}}{{help_center.name}}{{/link}}
-    .footer-language-selector
-      | {{#if alternative_locales}}
-      .dropdown.language-selector(aria-haspopup='true')
-        a.dropdown-toggle
-          | {{current_locale.name}}
-        span.dropdown-menu.dropdown-menu-end(role='menu')
-          | {{#each alternative_locales}}
-          a(href='{{url}}', dir='{{direction}}', rel='nofollow', role='menuitem')
-            | {{name}}
-          | {{/each}}
-      | {{/if}}
+    p
+      a(href='https://dynamicsignal.com/') dynamicsignal.com
+      | |
+      a(href='https://dynamicsignal.com/legal/') Legal
+      | |
+      a(href='https://dynamicsignal.com/privacy/') Privacy
+      | |
+      a(href='https://dynamicsignal.com/gdpr/') GDPR
+
