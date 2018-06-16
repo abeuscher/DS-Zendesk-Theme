@@ -47,7 +47,7 @@
     h2, a {
       color:$white;
     }
-    padding-top:40px;
+    padding-top:10px;
     display:block;
     a.button-cta-bottom {
       background: $header-blue;
@@ -72,7 +72,7 @@
       }
     }
     @include bp(m) {
-      height:150px;
+      height:50px;
       &.modal {
         position:fixed;
         top:0;
