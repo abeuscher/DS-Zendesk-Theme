@@ -2,7 +2,7 @@
   width:100%;
   display: flex;
   flex-wrap:wrap;
-  .inner {
+  .inner, .header_inner {
     display: flex;
     align-items: top;
     justify-content: space-between;
@@ -14,6 +14,18 @@
     z-index: 10;
     flex-wrap:wrap;
   }
+}
+.header_inner {
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 30px;
+  background: $header-blue;
+  border-bottom: 1px solid #EEE;
+  z-index: 10;
+  flex-wrap:wrap;
 }
 .logo {
   flex-basis:25%;
