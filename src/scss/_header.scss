@@ -28,9 +28,13 @@
   flex-wrap:wrap;
 }
 .logo {
-  flex-basis:25%;
+  flex-basis:50%;
+  @include bp(m) {
+    flex-basis:25%;
+  }
   img {
     max-height: 40px;
+    max-width:100%;
   }
 }
 
@@ -78,8 +82,11 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: right;
-  flex-basis:25%;
+  flex-basis:50%;
   text-align:right;
+  @include bp(m) {
+    flex-basis:25%;
+  }
 }
 
 .nav-wrapper a {
@@ -88,8 +95,11 @@
   display: none;
   font-size: 14px;
   font-weight: 600;
-  padding: 0 20px 0 0;
+  padding: 0;
   width: auto;
+  @include bp(m) {
+    padding: 0 20px 0 0;
+  }
 }
 
 @media (min-width: 768px) {
@@ -110,6 +120,12 @@
 
 .nav-wrapper a.login {
   display: inline-block;
+}
+.nav-wrapper a.submit-a-request {
+  display:block;
+  @include bp(m) {
+    display:inline-block;
+  }
 }
 
 .nav-wrapper .icon-menu {
@@ -138,7 +154,12 @@
 }
 
 .search-wrapper {
-  flex-basis:50%;
+  display:none;
+  @include bp(m) {
+    flex-basis:50%;
+    display:block;
+  }
+  
   text-align:center;
   flex-direction: column-reverse;
   align-items: center;
