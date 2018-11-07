@@ -12,6 +12,24 @@ block content
           | {{#if article.internal}}
           span.icon-lock(title="{{t 'internal'}}")
           | {{/if}}
+        .article-author
+          .avatar.article-avatar
+            | {{#if article.author.agent}}
+            span.icon-agent
+            |             {{/if}}
+            img.user-avatar(src='{{article.author.avatar_url}}', alt='Avatar')
+          .article-meta
+            | {{#link 'user_profile' id=article.author.id}}
+            | {{article.author.name}}
+            | {{/link}}
+            ul.meta-group
+              | {{#is article.created_at article.edited_at}}
+              li.meta-data {{date article.created_at timeago=true}}
+              |               {{else}}
+              li.meta-data {{date article.edited_at timeago=true}}
+              li.meta-data {{t 'updated'}}
+              |               {{/is}}
+        |         {{subscribe}}
       section.article-info
         .article-content
           .article-body {{article.body}}

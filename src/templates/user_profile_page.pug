@@ -106,26 +106,26 @@ nav.profile-nav.collapsible-nav
             | {{#is object_type 'comment'}}
             li.meta-data
               a.comment-link(href='{{url}}') {{t 'view_comment'}}
-            |                         {{/is}}
+            | {{/is}}
             li.meta-data {{author.name}}
             |                         {{#if editor}}
             li.meta-data {{date edited_at timeago=true}}
             li.meta-data
               | {{#is object_type 'article'}}
               | {{t 'updated'}}
-            |                             {{else}}
-            |                               {{t 'edited'}}
-            |                             {{/is}}
-      |                         {{else}}
-      li.meta-data {{date created_at timeago=true}}
-      |                         {{/if}}
-      |                         {{#each stats}}
-      li.meta-data {{label}}
-      |                         {{/each}}
-|                   {{/with}}
-|               {{/each}}
-|           {{/if}}
-|           {{#unless activities}}
+              |                             {{else}}
+              |                               {{t 'edited'}}
+              |                             {{/is}}
+            |                         {{else}}
+            li.meta-data {{date created_at timeago=true}}
+            |                         {{/if}}
+            |                         {{#each stats}}
+            li.meta-data {{label}}
+            |                         {{/each}}
+            |                   {{/with}}
+          |               {{/each}}
+          |           {{/if}}
+  |           {{#unless activities}}
 span.no-activity {{t 'no_contributions'}}
 |           {{/unless}}
 |     {{/is}}
@@ -173,23 +173,23 @@ span.no-activity {{t 'no_contributions'}}
           | {{#is object_type 'comment'}}
           li.meta-data
             a.comment-link(href='{{url}}') {{t 'view_comment'}}
-          |                     {{/is}}
+          | {{/is}}
           li.meta-data {{author.name}}
-          |                     {{#if editor}}
+          | {{#if editor}}
           li.meta-data {{date edited_at timeago=true}}
           li.meta-data
             | {{#is object_type 'article'}}
-            | {{t 'updated'}}
-          |                         {{else}}
-          |                           {{t 'edited'}}
-          |                         {{/is}}
-      |                     {{else}}
-      li.meta-data {{date created_at timeago=true}}
-      |                     {{/if}}
-      |                     {{#each stats}}
-      li.meta-data {{label}}
-      |                     {{/each}}
-    |               {{/each}}
+            |   {{t 'updated'}}
+            | {{else}}
+            |    {{t 'edited'}}
+            | {{/is}}
+          | {{else}}
+          li.meta-data {{date created_at timeago=true}}
+          | {{/if}}
+          | {{#each stats}}
+          li.meta-data {{label}}
+          | {{/each}}
+      | {{/each}}
     |             {{pagination}}
     |           {{/if}}
     |           {{#unless contributions}}

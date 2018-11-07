@@ -349,6 +349,13 @@ function triggerGA() {
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MQKZ8M');
+  //Push data to GA
+  _gaq.push(['_setCustomVar',
+  1,                   // This custom var is set to slot #1.  Required parameter.
+  'User Agent',     // The name acts as a kind of category for the user activity.  Required parameter.
+  window.navigator.userAgent,               // This value of the custom variable.  Required parameter.
+  2                    // Sets the scope to session-level.  Optional parameter.
+]);
 }
 function checkCookies(){
   var cookieEnabled = navigator.cookieEnabled;

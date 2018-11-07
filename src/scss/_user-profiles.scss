@@ -535,6 +535,10 @@
   margin-top: 10px;
   border-radius: 8px;
   background-color: darken($header-blue, 3%);
+  color:$white;
+  a {
+    color:$lighter-gray;
+  }
 }
 
 @media (min-width: 768px) {
@@ -580,12 +584,12 @@
 
 .profile-articles > .profile-contribution::before,
 .profile-activity-list > li[class$="-article"]::before {
-  content: "\1f4c4";
+  //content: "\1f4c4";
 }
 
 .profile-posts > .profile-contribution::before,
 .profile-activity-list > li[class$="-post"]::before {
-  content: "\1f4d4";
+  //content: "\1f4d4";
 }
 
 .profile-comments > .profile-contribution::before,
