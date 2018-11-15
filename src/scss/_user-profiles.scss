@@ -536,8 +536,8 @@
   border-radius: 8px;
   background-color: darken($header-blue, 3%);
   color:$white;
-  a {
-    color:$lighter-gray;
+  a, a:visited, a:active {
+    color:$lighter-gray!important;
   }
 }
 

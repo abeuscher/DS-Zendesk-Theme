@@ -138,7 +138,16 @@ var sidebar = new Vue({
 $(document).ready(function() {
   if (checkCookies()) {
     triggerGDPR();
+    //Push data to GA
+
   }
+  ga('send', {
+    hitType: 'event',
+    eventCategory: 'Agents',
+    eventAction: 'UserAgent',
+    eventLabel: window.navigator.userAgent
+  });
+  console.log("Sent value:" + window.navigator.userAgent);
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
@@ -237,7 +246,13 @@ $(document).ready(function() {
   $("#request-organization select").on("change", function() {
     this.form.submit();
   });
-
+  $(".dropdown-toggle").on("click", function(e) {
+    e.stopPropagation();
+    var isExpanded = this.getAttribute("aria-expanded") === "true";
+    this.setAttribute("aria-expanded", !isExpanded);
+    var menu = this.parentNode.querySelectorAll("[role='menu']")[0];
+    menu.setAttribute("aria-expanded", !isExpanded);
+  });
   // Toggles expanded aria to collapsible elements
   $(".collapsible-nav, .collapsible-sidebar").on("click", function(e) {
     e.stopPropagation();
@@ -338,7 +353,7 @@ function triggerGDPR() {
         expires: 365,
         domain:domain
       });
-      triggerGA();
+      //triggerGA();
       return true;
     });
   }
@@ -349,13 +364,6 @@ function triggerGA() {
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MQKZ8M');
-  //Push data to GA
-  _gaq.push(['_setCustomVar',
-  1,                   // This custom var is set to slot #1.  Required parameter.
-  'User Agent',     // The name acts as a kind of category for the user activity.  Required parameter.
-  window.navigator.userAgent,               // This value of the custom variable.  Required parameter.
-  2                    // Sets the scope to session-level.  Optional parameter.
-]);
 }
 function checkCookies(){
   var cookieEnabled = navigator.cookieEnabled;

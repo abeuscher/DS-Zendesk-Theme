@@ -134,7 +134,106 @@ ul {
     width: 90%;
   }
 }
-
+.dropdown {
+  position: relative;
+  display: inline-block; }
+.dropdown-toggle {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle; }
+.dropdown-toggle:hover {
+    text-decoration: none; }
+.dropdown-toggle::after {
+    color: #888888;
+    content: "\A0\A0\E75C";
+    display: inline-block;
+    font-family: "entypo";
+    vertical-align: middle; }
+.dropdown-toggle > * {
+    display: inline-block; }
+.dropdown-menu {
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+  display: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  left: 0;
+  margin-top: 1px;
+  min-width: 170px;
+  padding: 10px 0;
+  position: absolute;
+  text-align: left;
+  z-index: 1000; }
+[dir="rtl"] .dropdown-menu {
+    text-align: right; }
+.dropdown-menu[aria-expanded="true"] {
+    display: block; }
+.dropdown-menu [role="separator"] {
+    border-bottom: 1px solid #d8d8d8;
+    color: #969696;
+    display: block;
+    font-weight: normal;
+    font-size: 11px;
+    padding: 5px 0;
+    margin: 5px 20px 10px 20px; }
+.dropdown-menu [role="menuitem"] {
+    color: #333;
+    cursor: pointer;
+    display: block;
+    padding: 7px 40px 7px 20px;
+    white-space: nowrap; }
+[dir="rtl"] .dropdown-menu [role="menuitem"] {
+      padding: 7px 20px 7px 40px; }
+.dropdown-menu [role="menuitem"]:hover {
+      background: #f3f3f3;
+      text-decoration: none;
+      color: #333; }
+.dropdown-menu [role="menuitem"][aria-selected="true"] {
+      background: #f3f3f3;
+      cursor: default; }
+.dropdown-menu [role="menuitem"][aria-selected="true"]::after {
+        content: "\2713";
+        margin-left: 10px;
+        font-family: "entypo"; }
+[dir="rtl"] .dropdown-menu [role="menuitem"][aria-selected="true"]::after {
+          margin-left: 0;
+          margin-right: 10px;
+          float: left; }
+.dropdown-menu [role="menuitem"][hidden], .dropdown-menu [role="menuitem"][aria-hidden="true"] {
+      display: none !important; }
+.dropdown-menu-caret {
+  margin-top: 10px; }
+.dropdown-menu-caret::before, .dropdown-menu-caret::after {
+    content: "";
+    display: inline-block;
+    position: absolute; }
+.dropdown-menu-caret::before {
+    top: -7px;
+    left: 9px;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #d8d8d8;
+    border-left: 7px solid transparent; }
+.dropdown-menu-caret::after {
+    top: -6px;
+    left: 10px;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent; }
+.dropdown-menu-end {
+  left: auto;
+  right: 0; }
+.dropdown-menu-end.dropdown-menu-caret::before {
+    left: auto;
+    right: 9px; }
+.dropdown-menu-end.dropdown-menu-caret::after {
+    left: auto;
+    right: 10px; }
+.dropdown-menu-top {
+  bottom: 100%;
+  margin-bottom: 1px; }
 .dropdown-toggle::after {
   color: inherit;
 }
