@@ -147,7 +147,6 @@ $(document).ready(function() {
     eventAction: 'UserAgent',
     eventLabel: window.navigator.userAgent
   });
-  console.log("Sent value:" + window.navigator.userAgent);
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
@@ -353,9 +352,12 @@ function triggerGDPR() {
         expires: 365,
         domain:domain
       });
-      //triggerGA();
+      triggerGA();
       return true;
     });
+  }
+  else {
+    triggerGA();
   }
 }
 function triggerGA() {
