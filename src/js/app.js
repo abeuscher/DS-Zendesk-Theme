@@ -141,16 +141,28 @@ $(document).ready(function() {
     //Push data to GA
 
   }
-  ga('send', {
-    hitType: 'event',
-    eventCategory: 'Agents',
-    eventAction: 'UserAgent',
-    eventLabel: window.navigator.userAgent
-  });
+  dataLayer = dataLayer || [];
+  dataLayer.push({"event" : window.navigator.userAgent });
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
-  }
+     
+
+  }  
+   if (document.getElementById("sidebar")) {
+//Enable Release Notes Link
+    var followLink = document.getElementById("follow-rn");
+    if (HelpCenter.user.role!="anonymous") {
+      followLink.style.display="block";
+      console.log(HelpCenter);
+      fetch('/api/v2/users/360929414012.json').then(
+        function requestDone(data) {
+          return data.json();
+        }
+       )
+       .then(function(data) { console.log(data);})
+    }
+  }   
   $(".share a").click(function(e) {
     e.preventDefault();
     window.open(this.href, "", "height = 500, width = 500");
@@ -167,6 +179,7 @@ $(document).ready(function() {
   if ($commentContainerTextarea.val() !== "") {
     $commentContainerFormControls.show();
   }
+
 
   // Expand Request comment form when Add to conversation is clicked
   var $showRequestCommentContainerTrigger = $(".request-container .comment-container .comment-show-container"),
