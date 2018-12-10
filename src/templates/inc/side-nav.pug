@@ -4,7 +4,7 @@
     li.sidebar-item.sidebar-home
       a.sidebar-item-title(href="{{page_path 'help_center'}}") Home
     li.sidebar-item.sidebar-home#follow-rn
-      a.sidebar-item-title(rel='nofollow', role='menuitem', data-method='post', href='/hc/en-us/sections/360000234171-Release-Notes/subscription?subscribe_to_grandchildren=false') Follow Release Notes
+      a.sidebar-item-title(rel='nofollow', role='menuitem', href='/hc/en-us/sections/360000234171-Release-Notes/') Release Notes
     li.sidebar-section(v-for='category in categories', :data-id='category.id')
       h4.sidebar-category-title(v-cloak='') 
         a(:href="category.html_url") {[{category.name}]}

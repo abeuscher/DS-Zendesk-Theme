@@ -151,17 +151,12 @@ $(document).ready(function() {
   }  
    if (document.getElementById("sidebar")) {
 //Enable Release Notes Link
+/*
     var followLink = document.getElementById("follow-rn");
     if (HelpCenter.user.role!="anonymous") {
       followLink.style.display="block";
-      console.log(HelpCenter);
-      fetch('/api/v2/users/360929414012.json').then(
-        function requestDone(data) {
-          return data.json();
-        }
-       )
-       .then(function(data) { console.log(data);})
     }
+    */
   }   
   $(".share a").click(function(e) {
     e.preventDefault();
