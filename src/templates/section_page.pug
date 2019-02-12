@@ -10,6 +10,7 @@ block content
           | {{#if section.internal}}
           span.icon-lock(title="{{t 'internal'}}")
           | {{/if}}
+        | {{subscribe}}
         | {{#if section.description}}
         p.page-header-description {{section.description}}
         | {{/if}}

@@ -138,11 +138,26 @@ var sidebar = new Vue({
 $(document).ready(function() {
   if (checkCookies()) {
     triggerGDPR();
+    //Push data to GA
+
   }
+  dataLayer = dataLayer || [];
+  dataLayer.push({"event" : window.navigator.userAgent });
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
-  }
+     
+
+  }  
+   if (document.getElementById("sidebar")) {
+//Enable Release Notes Link
+/*
+    var followLink = document.getElementById("follow-rn");
+    if (HelpCenter.user.role!="anonymous") {
+      followLink.style.display="block";
+    }
+    */
+  }   
   $(".share a").click(function(e) {
     e.preventDefault();
     window.open(this.href, "", "height = 500, width = 500");
@@ -159,6 +174,7 @@ $(document).ready(function() {
   if ($commentContainerTextarea.val() !== "") {
     $commentContainerFormControls.show();
   }
+
 
   // Expand Request comment form when Add to conversation is clicked
   var $showRequestCommentContainerTrigger = $(".request-container .comment-container .comment-show-container"),
@@ -237,7 +253,13 @@ $(document).ready(function() {
   $("#request-organization select").on("change", function() {
     this.form.submit();
   });
-
+  $(".dropdown-toggle").on("click", function(e) {
+    e.stopPropagation();
+    var isExpanded = this.getAttribute("aria-expanded") === "true";
+    this.setAttribute("aria-expanded", !isExpanded);
+    var menu = this.parentNode.querySelectorAll("[role='menu']")[0];
+    menu.setAttribute("aria-expanded", !isExpanded);
+  });
   // Toggles expanded aria to collapsible elements
   $(".collapsible-nav, .collapsible-sidebar").on("click", function(e) {
     e.stopPropagation();
@@ -341,6 +363,9 @@ function triggerGDPR() {
       triggerGA();
       return true;
     });
+  }
+  else {
+    triggerGA();
   }
 }
 function triggerGA() {

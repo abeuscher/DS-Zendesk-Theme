@@ -2,7 +2,7 @@
   width:100%;
   display: flex;
   flex-wrap:wrap;
-  .inner {
+  .inner, .header_inner {
     display: flex;
     align-items: top;
     justify-content: space-between;
@@ -15,10 +15,26 @@
     flex-wrap:wrap;
   }
 }
+.header_inner {
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 30px;
+  background: $header-blue;
+  border-bottom: 1px solid #EEE;
+  z-index: 10;
+  flex-wrap:wrap;
+}
 .logo {
-  flex-basis:25%;
+  flex-basis:50%;
+  @include bp(m) {
+    flex-basis:25%;
+  }
   img {
     max-height: 40px;
+    max-width:100%;
   }
 }
 
@@ -37,8 +53,11 @@
 
 .user-nav {
   display: inline-block;
-  position: absolute;
+  position: relative;
   white-space: nowrap;
+  @include bp(m) {
+    position:absolute;
+  }
 }
 
 @media (min-width: 768px) {
@@ -66,8 +85,11 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: right;
-  flex-basis:25%;
+  flex-basis:50%;
   text-align:right;
+  @include bp(m) {
+    flex-basis:25%;
+  }
 }
 
 .nav-wrapper a {
@@ -76,8 +98,11 @@
   display: none;
   font-size: 14px;
   font-weight: 600;
-  padding: 0 20px 0 0;
+  padding: 0;
   width: auto;
+  @include bp(m) {
+    padding: 0 20px 0 0;
+  }
 }
 
 @media (min-width: 768px) {
@@ -99,6 +124,12 @@
 .nav-wrapper a.login {
   display: inline-block;
 }
+.nav-wrapper a.submit-a-request {
+  display:block;
+  @include bp(m) {
+    display:inline-block;
+  }
+}
 
 .nav-wrapper .icon-menu {
   display: inline-block;
@@ -118,18 +149,29 @@
 }
 
 .header .search {
-  display: none;
-  min-width: 300px;
-  max-width: 600px;
-  width: 50%;
-  margin: 0 20px;
+  //display: none;
+  width:100%;
+  margin:0;
+  @include bp(m) {
+    min-width: 300px;
+    max-width: 600px;
+    width: 50%;
+    margin: 0 20px;
+  }
 }
 
 .search-wrapper {
-  flex-basis:50%;
+  //display:none;
   text-align:center;
   flex-direction: column-reverse;
   align-items: center;
+  order:3;
+  flex-basis:100%;
+  @include bp(m) {
+    flex-basis:50%;
+    display:block;
+    order:0;
+  }
 }
 
 .mobile-search-wrapper {
@@ -205,7 +247,7 @@
 
 /***** User avatar *****/
 .user-avatar {
-  display: none;
+  //display: none;
   height: 25px;
   width: 25px;
   border-radius: 50%;

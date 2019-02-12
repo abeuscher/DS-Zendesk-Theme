@@ -3,8 +3,11 @@
   ul.sidebar
     li.sidebar-item.sidebar-home
       a.sidebar-item-title(href="{{page_path 'help_center'}}") Home
+    li.sidebar-item.sidebar-home#follow-rn
+      a.sidebar-item-title(rel='nofollow', role='menuitem', href='/hc/en-us/sections/360000234171-Release-Notes/') Release Notes
     li.sidebar-section(v-for='category in categories', :data-id='category.id')
-      h4.sidebar-category-title(v-cloak='') {[{category.name}]}
+      h4.sidebar-category-title(v-cloak='') 
+        a(:href="category.html_url") {[{category.name}]}
       ul
         li(:class="['sidebar-item', isOpen(section.id)]", v-for='section in category.sections', :data-id='section.id')
           span.sidebar-item-title(@click='setActiveSection(section.id)')

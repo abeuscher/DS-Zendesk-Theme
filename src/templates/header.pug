@@ -1,4 +1,5 @@
 header.header
+  .alertbox
   .inner
     .logo
       | {{#link 'help_center' class='logo-link' }}
@@ -8,6 +9,5 @@ header.header
       | {{search submit=false instant=true}}
     .nav-wrapper
       nav#user-nav.user-nav 
-        a(href="https://dynamicsignal.desk.com/customer/portal/emails/new") Submit a Request
+        | {{link 'new_request' class='submit-a-request'}}
         | {{user_info}}  
-  .alertbox
