@@ -1,5 +1,9 @@
 var Cookies = require("js-cookie");
 var parseHTML = require("./utils/parse-html.js");
+require("./statuspage/index.js");
+
+
+
 
 // Custom delimiter for Vue templates
 Vue.options.delimiters = ['{[{', '}]}'];
@@ -141,8 +145,7 @@ $(document).ready(function() {
     //Push data to GA
 
   }
-  dataLayer = dataLayer || [];
-  dataLayer.push({"event" : window.navigator.userAgent });
+  checkStatus();
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];
     sidebar.$mount(theDiv);
@@ -374,6 +377,8 @@ function triggerGA() {
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MQKZ8M');
+  dataLayer = dataLayer || [];
+  dataLayer.push({"event" : window.navigator.userAgent });
 }
 function checkCookies(){
   var cookieEnabled = navigator.cookieEnabled;
@@ -414,3 +419,20 @@ function wipeCookies() {
     });
   });
 })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+
+function checkStatus() {
+  var sp = new StatusPage.page({
+    page: 'x6wrml6mfzfm'
+  }); // Change this ID for your Statuspage's Page ID, found under Account->API
+  sp.summary({
+    success: function(data) {
+      var status = document.createElement("a");
+      status.href = "https://dynamicsignal.statuspage.io/";
+      status.target="_blank";
+      status.innerHTML = "<span class='status-dot "+data.status.indicator+"'></span>Status";
+      if (document.getElementById("status-message")) {
+        document.getElementById("status-message").appendChild(status);
+      }
+    }
+  });
+}

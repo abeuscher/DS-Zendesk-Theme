@@ -1,5 +1,7 @@
 header.header
   .alertbox
+  .status-wrapper
+    #status-message
   .inner
     .logo
       | {{#link 'help_center' class='logo-link' }}
@@ -11,3 +13,4 @@ header.header
       nav#user-nav.user-nav 
         | {{link 'new_request' class='submit-a-request'}}
         | {{user_info}}  
+

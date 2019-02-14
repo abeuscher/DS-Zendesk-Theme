@@ -279,3 +279,38 @@
   text-align: center;
   width: 14px;
 }
+.status-wrapper {
+  width:100%;
+  text-align:right;
+  background:$menu-blue;
+  padding:.25em $gutter-width;
+  a {
+    color:$white;
+    font-size:.8em;
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+  .status-dot {
+    border-radius:50%;
+    width:1em;
+    height:1em;
+    background:red;
+    display:inline-block;
+    margin-right:.5em;
+    &.critical {
+      background:red;
+    }
+    &.minor {
+      background:yellow;
+    }
+    &.major {
+      background:#f39e1e;
+    }
+    &.none {
+      background:#0d9a48;
+    }
+
+  }
+}

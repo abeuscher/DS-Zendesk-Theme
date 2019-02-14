@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
-  "name": "Dynamic Signal Support Site Theme - 1.1.1",
+  "name": "Dynamic Signal Support Site Theme - 1.1.12",
   "author": "Al Beuscher",
-  "version": "1.1.1",
-=======
-  "name": "Dynamic Signal Support Site Theme - 1.1.11",
-  "author": "Al Beuscher",
-  "version": "1.1.11",
->>>>>>> master
+  "version": "1.1.12",
   "api_version": 1,
   "settings": [
     {
