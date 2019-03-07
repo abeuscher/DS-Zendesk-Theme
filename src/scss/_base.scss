@@ -237,3 +237,31 @@ ul {
 .dropdown-toggle::after {
   color: inherit;
 }
+body.modal-show {
+  overflow:hidden;
+  .modal {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:rgba(0,0,0,.6);
+    display:flex;
+    align-items: center;
+    text-align: center;
+    z-index:99;
+    img {
+      width:95%;
+      display:inline-block;
+      height:auto;
+      margin-left:2.5%;
+    }
+    a {
+      position:fixed;
+      top:5%;
+      right:$gutter-width;
+      font-size:3em;
+      color:$white;
+    }
+  }
+}

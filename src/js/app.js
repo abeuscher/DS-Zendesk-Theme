@@ -290,7 +290,7 @@ $(document).ready(function() {
   activateImages();
   activateAlerts();
   TableHandler();
-
+  activateLightbox();
 });
 
 function activateImages() {
@@ -435,4 +435,29 @@ function checkStatus() {
       }
     }
   });
+}
+function activateLightbox() {
+  var popImages = document.querySelectorAll(".launch-lightbox");
+  console.log(popImages);
+  if (popImages.length>0) {
+    for (i=0;i<popImages.length;i++) {
+      var thisPop = popImages[i];
+      thisPop.addEventListener("click", function(e) {
+        e.preventDefault();
+        console.log(e);
+        var theModal = document.createElement("div"), theImage = document.createElement("img"), theCloser = document.createElement("a");
+        theImage.src = this.src;
+        theModal.classList.add("modal");
+        theCloser.innerHTML = "&times;";
+        theModal.appendChild(theCloser);
+        theModal.appendChild(theImage);
+        document.body.classList.add("modal-show");
+        document.body.appendChild(theModal);
+        theModal.addEventListener("click", function() {
+          document.body.removeChild(theModal);
+          document.body.classList.remove("modal-show");
+        });
+      })
+    }
+  }
 }
