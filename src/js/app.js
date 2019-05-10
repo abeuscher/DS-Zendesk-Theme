@@ -372,6 +372,7 @@ function triggerGDPR() {
   }
 }
 function triggerGA() {
+  /*
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -379,6 +380,7 @@ function triggerGA() {
   })(window,document,'script','dataLayer','GTM-MQKZ8M');
   dataLayer = dataLayer || [];
   dataLayer.push({"event" : window.navigator.userAgent });
+  */
 }
 function checkCookies(){
   var cookieEnabled = navigator.cookieEnabled;
