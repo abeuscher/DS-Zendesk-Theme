@@ -52,6 +52,10 @@ block content
           small.article-vote-count
             | {{vote 'label' class='article-vote-label'}}
         | {{/with}}
+      .negative-followup
+        p We're sorry to hear this wasn't helpful. Please 
+          a(href="https://support.dynamicsignal.com/hc/en-us/requests/new?ticket_form_id=360000322872&article_id={{article.id}}") leave more feedback here if possible
+          | .
       footer
         .article-footer
           | {{#isnt section.name "FAQ" }}

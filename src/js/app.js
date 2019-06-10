@@ -161,6 +161,49 @@ $(document).ready(function() {
     }
     */
   }   
+  //Add link to appear when user downvotes article
+  if (document.getElementsByClassName("negative-followup").length>0) {
+    var formLink = document.querySelectorAll(".negative-followup")[0];
+    var downvote = document.querySelectorAll(".article-vote-down")[0];
+    downvote.addEventListener("click", function(e) {
+      formLink.classList.add("active");
+    });
+  }
+  if (document.getElementById("new_request")) {
+    var theForm = document.getElementById("new_request");
+    var articleID = getUrlParameter("article_id");
+    if (articleID) {
+      document.getElementById("request_subject").value = "Feedback on Article ID# " + articleID;
+    }
+    //fixRequestSelect();
+    
+    var formMenu = document.getElementById("request_issue_type_select");
+    var formOptions = formMenu.querySelectorAll("option");
+    for (i=0;i<formOptions.length;i++) {
+      if (formOptions[i].getAttribute("data-url").indexOf("360000290032")>-1 && !formOptions[i].selected) {
+        location.replace(formOptions[i].getAttribute("data-url"))
+      }
+      else if(formOptions[i].getAttribute("data-url").indexOf("360000290032")>-1 && formOptions[i].selected) {
+        var fauxMenu = document.querySelectorAll(".request_ticket_form_id")[0];
+
+        fauxMenu.style.display="none";
+      }
+      
+    }
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      var decoded = null;
+      try {
+          decoded = decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+      catch(e) {
+          decoded = null;
+      }
+      return results === null ? '' : decoded;
+  };
+  }
   $(".share a").click(function(e) {
     e.preventDefault();
     window.open(this.href, "", "height = 500, width = 500");
@@ -372,7 +415,6 @@ function triggerGDPR() {
   }
 }
 function triggerGA() {
-  /*
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -380,7 +422,6 @@ function triggerGA() {
   })(window,document,'script','dataLayer','GTM-MQKZ8M');
   dataLayer = dataLayer || [];
   dataLayer.push({"event" : window.navigator.userAgent });
-  */
 }
 function checkCookies(){
   var cookieEnabled = navigator.cookieEnabled;
@@ -460,4 +501,32 @@ function activateLightbox() {
       })
     }
   }
+}
+function fixRequestSelect() {
+  var i = 0;
+  var cZendesk = false; //assume user is not part of the Zendesk Organization
+  //reserve space for additional organizations
+  var checkExist = setInterval(function() {
+     i++;
+     if ($("a.nesty-input").length){
+        clearInterval(checkExist);
+        $("a.nesty-input").each(function() {
+           $(this).bind( "click", function() {
+              for (var c in HelpCenter.user.organizations) {
+                 if (HelpCenter.user.organizations[c].name == "ZENDESK"){
+                    cZendesk = true; //if user is part of the organization called "ZENDESK", then set its variable to true.
+                 }
+                 //reserve space for additional organizations
+                 }
+                 if (!cZendesk){
+                    $("#360000322872").remove(); //remove the "TICKET_FORM_ID" with the proper id from the dropdown list. Leave the pound sign intact.
+                 }
+           //reserve space for additional organizations
+           });
+        });
+     }
+     if (i > 10){
+        clearInterval(checkExist);
+     }
+  }, 100);
 }

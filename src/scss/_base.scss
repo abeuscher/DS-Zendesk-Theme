@@ -265,3 +265,17 @@ body.modal-show {
     }
   }
 }
+.negative-followup {
+  display:none;
+  background:$blue;
+  color:$white;
+  text-align:center;
+  padding:$gutter-width;
+  a {
+    text-decoration:underline;
+    color:$white;
+  }
+  &.active {
+    display:block;
+  }
+}
