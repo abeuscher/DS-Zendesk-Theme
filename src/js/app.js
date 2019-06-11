@@ -176,20 +176,21 @@ $(document).ready(function() {
       document.getElementById("request_subject").value = "Feedback on Article ID# " + articleID;
     }
     //fixRequestSelect();
-    
-    var formMenu = document.getElementById("request_issue_type_select");
-    var formOptions = formMenu.querySelectorAll("option");
-    for (i=0;i<formOptions.length;i++) {
-      if (formOptions[i].getAttribute("data-url").indexOf("360000290032")>-1 && !formOptions[i].selected) {
-        location.replace(formOptions[i].getAttribute("data-url"))
-      }
-      else if(formOptions[i].getAttribute("data-url").indexOf("360000290032")>-1 && formOptions[i].selected) {
-        var fauxMenu = document.querySelectorAll(".request_ticket_form_id")[0];
+    /*
+        Feedback : 360000322872
+        General : 360000290032
+*/
 
-        fauxMenu.style.display="none";
-      }
-      
+    var formMenu = document.getElementById("request_issue_type_select");
+    var fauxMenu = document.querySelectorAll(".request_ticket_form_id")[0];
+    if (getUrlParameter("ticket_form_id")==null || getUrlParameter("ticket_form_id")=="") {
+      location.replace("https://support.dynamicsignal.com/hc/en-us/requests/new?ticket_form_id=360000290032");
     }
+    else {
+      console.log(getUrlParameter("ticket_form_id"));
+      fauxMenu.style.display="none";
+    }
+
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
       var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
