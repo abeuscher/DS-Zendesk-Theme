@@ -1,5 +1,12 @@
 main.main-sidebar(role='main')
-  .banner-home(data-bg="{{asset 'bg-header-home.jpg'}}")
+  style(type="text/css").
+    .header .search-wrapper {
+      display:none;
+    }
+  .banner-home(data-bg="{{asset 'bg-header-home-new.jpg'}}")
+    .search-wrapper
+      h2 What can we help you with?
+      | {{search submit=false instant=true}}
   .container.content
     section.section.knowledge-base
       section.categories.blocks

@@ -11,12 +11,49 @@
   margin: 40px 0;
 }
 .banner-home {
-  height: 20vw;
+  height: 250px;
   display: flex;
   width: 100%;
   flex-shrink: 0;
   background-size:cover;
   background-position:center center;
+  align-items:center;
+  .search-wrapper {
+    flex-basis:80%;
+    margin:0 10%;
+    form {
+      margin:0 10%;
+      width:80%;
+    }
+    h2 {
+      color: white;
+      font-size: 1.4em;
+      text-shadow: 2px 2px 5px rgba(0,0,0,.5);
+      font-weight: 700;
+      @include bp(m) {
+        font-size: 2em;
+      }
+    }
+    p {
+      color:$white;
+      font-weight:700;
+    }
+    @include bp(m) {
+      flex-basis:50%;
+      margin:0 25%;
+    }
+    @include bp(m) {
+      flex-basis:40%;
+      margin:0 30%;
+    }
+    @include bp(l) {
+      flex-basis:30%;
+      margin:0 35%;
+    }
+  }
+  @include bp(m) {
+    height:350px;
+  }
 }
 li.promoted-articles-item {
   width: 30%;

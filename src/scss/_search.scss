@@ -64,14 +64,15 @@
   flex: 1;
 }
 
-@media (min-width: 1024px) {
-  .search-results-column {
-    flex: 0 0 45%;
-  }
-}
-
 .search-results-list {
   margin-bottom: 25px;
+  a.search-result-link {
+    color:$blue;
+    font-weight:700;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
 }
 
 .search-results-list > li {
@@ -80,7 +81,7 @@
 }
 
 .search-results-list > li:first-child {
-  border-top: 1px solid #ddd;
+  //border-top: 1px solid #ddd;
 }
 
 .search-result-description {

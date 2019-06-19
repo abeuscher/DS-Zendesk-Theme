@@ -175,12 +175,6 @@ $(document).ready(function() {
     if (articleID) {
       document.getElementById("request_subject").value = "Feedback on Article ID# " + articleID;
     }
-    //fixRequestSelect();
-    /*
-        Feedback : 360000322872
-        General : 360000290032
-*/
-
     var formMenu = document.getElementById("request_issue_type_select");
     var fauxMenu = document.querySelectorAll(".request_ticket_form_id")[0];
     if (getUrlParameter("ticket_form_id")==null || getUrlParameter("ticket_form_id")=="") {
