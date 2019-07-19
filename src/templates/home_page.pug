@@ -1,6 +1,6 @@
 main.main-sidebar(role='main')
   style(type="text/css").
-    .header .search-wrapper {
+    .header .search-wrapper, .header .submit-a-request {
       display:none;
     }
   .banner-home(data-bg="{{asset 'bg-header-home-new.jpg'}}")
@@ -79,4 +79,5 @@ main.main-sidebar(role='main')
     | {{/if}}
     section.section.support
       h3 Still Have Questions? Contact Dynamic Signal Support.
-      p We’re happy to help with whatever questions you have. You can create a support ticket by selecting the “Submit a Request” link in the top right-hand corner of this page.
+      p We’re happy to help with whatever questions you have. You can create a support ticket 
+        a(href="https://support.dynamicsignal.com/hc/en-us/requests/new?ticket_form_id=360000290032") here.
