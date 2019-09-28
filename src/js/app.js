@@ -145,6 +145,16 @@ $(document).ready(function() {
     //Push data to GA
 
   }
+  var helpBtn = document.querySelectorAll("#user-nav .submit-a-request")[0];
+  if (HelpCenter.user && HelpCenter.user.tags) {
+    if (helpBtn && HelpCenter.user.organizations[0].name=="Dynamic Signal" && HelpCenter.user.tags.includes("dysi_employee")) {
+      helpBtn.innerHTML = "How can we help?";
+    }
+    else {
+      console.log(HelpCenter.user)
+    }
+  }
+ 
   checkStatus();
   if (document.getElementById("sidebar")) {
     var theDiv = document.getElementsByTagName("main")[0];

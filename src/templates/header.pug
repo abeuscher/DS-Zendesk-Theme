@@ -11,6 +11,6 @@ header.header
       | {{search submit=false instant=true}}
     .nav-wrapper
       nav#user-nav.user-nav 
-        | {{link 'new_request' class='submit-a-request'}}
-        | {{user_info}}  
+        a.submit-a-request(href='/hc/en-us/requests/new') Submit a request
+        | {{user_info}}
 
