@@ -1,0 +1,6 @@
+app
+node_modules
+yarn.lock
+conf
+logs
+yarn.lock
