@@ -1,6 +1,6 @@
 {
-  "name": "ds-new-preprocessor",
-  "version": "0.0.0",
+  "name": "ds-support-site",
+  "version": "1.1.23",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {

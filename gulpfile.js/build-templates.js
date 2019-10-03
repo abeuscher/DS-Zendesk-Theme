@@ -59,17 +59,10 @@ function buildTemplate(t) {
   src(t.srcDir + "*.pug")
     .pipe(
       pug({
-        pretty: false,
-        filters: {
-          php: pugPhpFilter
-        },
-        extension: "php",
-        locals: {
-          siteurl: ""
-        }
+        pretty: false
       })
     )
-    .pipe(extReplace(".php"))
+    .pipe(extReplace(".hbs"))
     .pipe(
       dest(t.buildDir).on("end", function() {
         console.log("Finished processing template set " + t.name);

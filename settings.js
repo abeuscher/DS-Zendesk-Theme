@@ -2,7 +2,7 @@ var srcDir = "./src/";
 var buildDir = "./public_html/";
 
 var jsSrcDir = srcDir + "js/";
-var jsBuildDir = buildDir + "js/";
+var jsBuildDir = buildDir;
 
 var templateSrcDir = srcDir + "templates/";
 
@@ -13,11 +13,7 @@ var assetsSrcDir = srcDir + "public_transfer/";
 var assetsBuildDir = buildDir;
 
 var templateSrcDir = srcDir + "templates/";
-var templateBuildDir = buildDir;
-
-var ukTemplatesSrc = srcDir + "uk_templates/";
-var ukStylesSrc = srcDir + "uk_scss/";
-var ukJSSrc = srcDir + "uk_js/";
+var templateBuildDir = buildDir + "templates/";
 
 var ukBuildDir = "app/public/wp-content/themes/ds-uk/";
 var ukJsBuildDir = ukBuildDir + "js/";
@@ -32,7 +28,7 @@ function siteSettings() {
         srcDir: jsSrcDir,
         srcFileName: "app.js",
         buildDir: jsBuildDir,
-        buildFileName: "bundle.js"
+        buildFileName: "script.js"
       }
     ],
     templates: [
